@@ -1,0 +1,47 @@
+@import 'bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois&family=Poppins:wght@300;600&family=Ubuntu:wght@500;700&display=swap');
+
+// Customize Bootstrap
+.form-control{
+    border-color: rgba(0, 0, 0, 0.282) ;
+    font-size: small;
+}
+.btn-primary{
+    background-color: #023047;
+    font-weight:900;
+}
+.btn-primary:hover{
+    background-color: #02496d;
+}
+
+// Custom Classes
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container{
+    display: flex;
+    width: 80vw;
+    flex-direction: column-reverse;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.login-content{
+    display: flex;
+    flex-direction: column;
+    padding: 80px 0px;
+    gap: 15px;
+}
