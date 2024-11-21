@@ -46,9 +46,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- nanti ini boleh dihapus, karena ini masih statis --}}
+                                @php
+                                    $nis = '2201169'
+                                @endphp
                                 @foreach(range(1, 15) as $index)
                                 {{-- nis nya masih contoh ya --}}
-                                <tr style="cursor: pointer" onclick="window.location='{{ route('guru.kelas.daftar-pekan', ['nis' => '2202960']) }}'">
+                                <tr style="cursor: pointer" onclick="window.location='{{ route('guru.kelas.daftar-pekan', ['nis' => $nis]) }}'">
                                     <td class="ps-3">
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-wrapper me-2">
@@ -59,7 +63,7 @@
                                             <span>Marvin McKinney</span>
                                         </div>
                                     </td>
-                                    <td>2201169</td>
+                                    <td>{{ $nis }}</td>
                                     <td>TK A</td>
                                     <td>5</td>
                                     <td>Laki-laki</td>
