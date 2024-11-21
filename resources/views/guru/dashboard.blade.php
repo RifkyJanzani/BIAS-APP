@@ -112,7 +112,7 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/student1.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
                                     Marvin McKinney
                                 </div>
                             </td>
@@ -126,7 +126,7 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/student2.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
                                     Esther Howard
                                 </div>
                             </td>
@@ -140,7 +140,7 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/student3.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
                                     Brooklyn Simmons
                                 </div>
                             </td>
@@ -154,7 +154,7 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/student4.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
                                     Courtney Henry
                                 </div>
                             </td>
