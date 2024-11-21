@@ -6,10 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name', 'BIAS APP') }}</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header id="header-nav">
-        <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="{{ asset('images/Burger.svg') }}" alt="Menu"></button>
+        <button class="btn burger-menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+            <img src="{{ asset('images/Burger.svg') }}" alt="Menu">
+        </button>
         <div class="dropdown">
             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img class="profile-image" src="{{ asset('images/Profile Icon.png') }}" alt="Profile">
@@ -54,10 +58,20 @@
                     </li>
                 </ul>
             </div>
-        </div>  
+        </div>
     </aside>
     <div id="app">
         @yield('content')
     </div>
+    <script>
+        const offcanvas = document.getElementById('offcanvasScrolling');
+        offcanvas.addEventListener('show.bs.offcanvas', function () {
+            document.body.classList.add('sidebar-open');
+        });
+
+        offcanvas.addEventListener('hide.bs.offcanvas', function () {
+            document.body.classList.remove('sidebar-open');
+        });
+    </script>
 </body>
 </html>
