@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <title>{{ config('app.name', 'BIAS APP') }}</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -65,4 +66,16 @@
         @yield('content')
     </div>
 </body>
+
+<script>
+    document.getElementById('photo').addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('photoPreview').src = e.target.result;
+        };
+        if (event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    });
+</script>
 </html>

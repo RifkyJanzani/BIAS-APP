@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiswaCOntroller;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman login
@@ -62,9 +63,7 @@ Route::prefix('guru')->group(function () {
 // Grup route untuk Admin
 Route::prefix('admin')->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
 
     // Kelas
     Route::get('/kelas', function () {
@@ -72,9 +71,13 @@ Route::prefix('admin')->group(function () {
     });
 
     // Daftar
-    Route::get('/daftar', function () {
-        return view('admin.daftar');
-    });
+    Route::get('/daftar', [SiswaController::class, 'index'])->name('admin.daftar');
+    Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+    Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::post('/import', [SiswaController::class, 'import'])->name('import');
+    Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+    Route::post('/siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
+    Route::delete('/siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
     // Penilaian
     Route::get('/penilaian', function () {
