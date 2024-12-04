@@ -59,7 +59,26 @@ class SiswaController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Siswa::create($request->all());
+            // Cek jika ada file foto
+            if ($request->hasFile('photo')) {
+                // Simpan foto di public/upload dengan nama yang unik
+                $photoName = time() . '-' . $request->file('photo')->getClientOriginalName();
+                $photoPath = $request->file('photo')->move(public_path('upload'), $photoName);
+                $photoPath = 'upload/' . $photoName; // Path relatif yang disimpan di database
+            } else {
+                // Jika tidak ada foto, biarkan null atau beri path default
+                $photoPath = null;
+            }
+
+        // Simpan data siswa ke database
+        Siswa::create([
+            'name' => $request->name,
+            'nis' => $request->nis,
+            'kelas' => $request->kelas,
+            'umur' => $request->umur,
+            'gender' => $request->gender,
+            'photo' => $photoPath, // Simpan path relatif atau null jika tidak ada foto
+        ]);
 
         return redirect()->route('admin.daftar')->with('success', 'Data siswa berhasil ditambahkan.');
     }
