@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +16,7 @@ Route::get('/login', function () {
 // Grup route untuk Guru
 Route::prefix('guru')->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('guru.dashboard');
-    })->name('guru.dashboard');
+    Route::get('/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
 
     // Kelas
     Route::get('/kelas', function () {

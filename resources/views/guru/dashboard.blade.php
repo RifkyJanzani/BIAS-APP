@@ -13,7 +13,7 @@
                         </div>
                         <div>
                             <p class="mb-0 text-start">Siswa</p>
-                            <h4 class="mb-0 text-start fw-bold">100</h4>
+                            <h4 class="mb-0 text-start fw-bold">{{ $jumlahSiswa }}</h4>
                         </div>
                     </div>
                 </div>
@@ -108,61 +108,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Baris 1 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Marvin McKinney
-                                </div>
-                            </td>
-                            <td>2201169</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
-
-                        <!-- Baris 2 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Esther Howard
-                                </div>
-                            </td>
-                            <td>2209014</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
-
-                        <!-- Baris 3 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Brooklyn Simmons
-                                </div>
-                            </td>
-                            <td>2210290</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
-
-                        <!-- Baris 4 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Courtney Henry
-                                </div>
-                            </td>
-                            <td>2201901</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
+                        <!-- Loop untuk menampilkan data siswa -->
+                        @foreach($siswa as $item)
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <!-- Cek jika foto ada, jika ada tampilkan, jika tidak tampilkan foto default -->
+                                        @if($item->photo)
+                                            <img src="{{ asset($item->photo) }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                                        @else
+                                            <img src="{{ asset('images/Profile Icon.png') }}" alt="Foto Default" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                                        @endif
+                                        {{ $item->name }}
+                                    </div>
+                                </td>
+                                <td>{{ $item->nis }}</td>
+                                <td>{{ $item->kelas }}</td>
+                                <td>{{ $item->umur }}</td>
+                                <td>{{ $item->gender == 'L' ? 'Laki-Laki' : 'Perempuan' }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
