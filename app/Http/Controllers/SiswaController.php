@@ -91,6 +91,9 @@ class SiswaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $siswa = Siswa::findOrFail($id);
+
+        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
             'nis' => 'required|string|max:20',
@@ -100,19 +103,48 @@ class SiswaController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $siswa = Siswa::findOrFail($id);
-        $siswa->update($request->all());
+        // Ambil semua input kecuali file `photo`
+        $data = $request->all();
+
+        // Proses upload foto baru (jika ada)
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($siswa->photo && file_exists(public_path($siswa->photo))) {
+                unlink(public_path($siswa->photo));
+            }
+
+            // Simpan foto baru
+            $photoName = time() . '-' . $request->photo->getClientOriginalName();
+            $request->photo->move(public_path('upload'), $photoName);
+            $data['photo'] = 'upload/' . $photoName;
+        } else {
+            // Jika tidak ada file baru, gunakan foto lama
+            $data['photo'] = $siswa->photo;
+        }
+
+        // Update data siswa
+        $siswa->update($data);
 
         return redirect()->route('admin.daftar')->with('success', 'Data siswa berhasil diperbarui.');
     }
 
+
+
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id);
+
+        // Hapus file foto jika ada
+        if ($siswa->photo && file_exists(public_path($siswa->photo))) {
+            unlink(public_path($siswa->photo));
+        }
+
+        // Hapus data siswa dari database
         $siswa->delete();
 
         return redirect()->route('admin.daftar')->with('success', 'Data siswa berhasil dihapus.');
     }
+
 
 
     public function import(Request $request)

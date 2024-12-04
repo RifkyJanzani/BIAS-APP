@@ -77,6 +77,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/import', [SiswaController::class, 'import'])->name('import');
     Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::post('/siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
+    Route::put('/siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
     // Penilaian

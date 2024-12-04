@@ -96,8 +96,8 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        @if($item->foto)
-                                            <img src="{{ asset('public/uploads' . $item->photo) }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                        @if($item->photo)
+                                            <img src="{{ asset($item->photo) }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                         @else
                                             <img src="{{ asset('images/Profile Icon.png') }}" alt="Default Foto" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                         @endif
