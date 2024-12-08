@@ -1,21 +1,38 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\KelasController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\RoleMiddleware;
 
-// Route untuk halaman login
 Route::get('/', function () {
-    return view('login');
-});
+    // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
+    if (Auth::check()) {
+        $user = Auth::user();
+           // Redirection berdasarkan role
+           if ($user->role == 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role == 'guru') {
+            return redirect()->route('guru.dashboard');
+        } elseif ($user->role == 'kepalaSekolah') {
+            return redirect()->route('kepalaSekolah.dashboard');
+        }
+    }
+    // Jika pengguna belum login, arahkan ke halaman login
+    return redirect()->route('login');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/login', function () {
-    return view('login');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Grup route untuk Guru
-Route::prefix('guru')->group(function () {
+Route::prefix('guru')->middleware('auth','guru')->group(function () {
     // Dashboard
     Route::get('/dashboard', function () {
         return view('guru.dashboard');
@@ -62,7 +79,7 @@ Route::prefix('guru')->group(function () {
 });
 
 // Grup route untuk Admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth','admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -85,3 +102,11 @@ Route::prefix('admin')->group(function () {
         return view('admin.penilaian');
     });
 });
+
+Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('kepalaSekolah.dashboard');
+    })->name('kepalaSekolah.dashboard');
+});
+
+require __DIR__.'/auth.php';

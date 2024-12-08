@@ -21,9 +21,12 @@
             <div class="dropdown-menu" style="height: 0; padding: 0;">
                 <div class="card text-bg-light mb-3 ">
                     <div class="dropdown-item">
-                        <div class="card-header">Halo, - nama guru -!</div>
+                        <div class="card-header">Halo, {{Auth()->user()->name}}</div>
                         <div class="card-body">
-                          <a href="#" class="btn btn-danger">Logout</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

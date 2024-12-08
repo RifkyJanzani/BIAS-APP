@@ -75,7 +75,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
         <!-- Header -->
-        <h5 class="card-title fw-bold mb-3 text-primary">Siswa</h5>
+        <h5 class="card-title fw-bold text-dark">Siswa</h5>
         
         <!-- Tabel -->
             @if($siswa->isNotEmpty())
