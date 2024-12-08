@@ -64,8 +64,9 @@ Route::prefix('guru')->group(function () {
 // Grup route untuk Admin
 Route::prefix('admin')->group(function () {
     // Dashboard
+    Route::get('/dashboard', [KelasController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard/{kelas}', [KelasController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
-
     // Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('admin.kelas.index');
     Route::get('/kelas/{kelas}', [KelasController::class, 'show'])->name('admin.kelas.show');

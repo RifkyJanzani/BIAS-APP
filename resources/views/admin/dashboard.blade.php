@@ -40,7 +40,8 @@
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title fw-bold text-dark">Kelas</h5>
-                {{-- <div class="dropdown">
+                
+                <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ $kelasDipilih ?? 'Pilih Kelas' }}
                     </button>
@@ -50,7 +51,7 @@
                             <li><a class="dropdown-item" href="{{ url('/dashboard?kelas=' . $kelas->kelas) }}">{{ $kelas->kelas }}</a></li>
                         @endforeach
                     </ul>
-                </div>                 --}}
+                </div>
             </div>
     
             <!-- Daftar Kelas -->
