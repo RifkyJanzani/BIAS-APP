@@ -48,7 +48,7 @@
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->kelas }}</td>
                                     <td>{{ $item->umur }}</td>
-                                    <td>{{ $item->gender }}</td>
+                                    <td>{{ $item->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>
                                         <!-- Tombol Edit -->
                                         <a href="{{ route('siswa.edit', $item->id) }}" class="btn btn-primary btn-sm me-2">

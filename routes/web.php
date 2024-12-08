@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SiswaCOntroller;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman login
@@ -66,9 +67,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
 
     // Kelas
-    Route::get('/kelas', function () {
-        return view('admin.kelas');
-    });
+    Route::get('/kelas', [KelasController::class, 'index'])->name('admin.kelas.index');
+    Route::get('/kelas/{kelas}', [KelasController::class, 'show'])->name('admin.kelas.show');
 
     // Daftar
     Route::get('/daftar', [SiswaController::class, 'index'])->name('admin.daftar');
