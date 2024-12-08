@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
     // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
@@ -82,6 +82,9 @@ Route::prefix('guru')->middleware('auth','guru')->group(function () {
 Route::prefix('admin')->middleware('auth','admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Akun
+    Route::get('/akun', [AdminController::class, 'akun'])->name('admin.akun');
 
     // Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('admin.kelas.index');

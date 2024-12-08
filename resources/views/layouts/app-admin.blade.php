@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJf+R8KkApWGbfsdG6UrdgD5xjOjV5vV6CwvDJitp9Ol5+dcQj19Hf4vvsU1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
     <title>{{ config('app.name', 'BIAS APP') }}</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0Tp5xxrO6bb5Gk5K6aF5tIkGpyU2b6n6tPjmwVeM8cX2vj6J" crossorigin="anonymous"></script>
     <header id="header-nav">
         <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="{{ asset('images/Burger.svg') }}" alt="Menu"></button>
         <div class="dropdown">
@@ -44,6 +47,11 @@
                     <li data-bs-dismiss="offcanvas">
                         <a href="/admin/dashboard" class="{{ request()->is('admin/dashboard*') ? 'selected' : '' }}">
                             <p><b>|</b></p><img src="{{ asset('images/Dashboard Icon.svg') }}" alt="">Dashboard
+                        </a>
+                    </li>
+                    <li data-bs-dismiss="offcanvas">
+                        <a href="/admin/akun" class="{{ request()->is('admin/akun*') ? 'selected' : '' }}">
+                            <p><b>|</b></p><img src="{{ asset('images/Profile Icon.png') }}" alt="">Akun
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
