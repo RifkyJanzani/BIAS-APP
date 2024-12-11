@@ -1,15 +1,15 @@
 @extends('layouts.app-admin')
 
 @section('content')
-    <div class="container">    
+    <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.akun') }}">Akun</a></li>
+            <ol class="breadcrumb bg-light rounded-3 p-2">
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.akun') }}" class="text-decoration-none text-dark fw-bold">Akun</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit Akun</li>
             </ol>
         </nav>
-        <h1>Edit Akun</h1>
+        <h1 class="mb-4">Edit Akun</h1>
         <form action="{{ route('akun.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -24,7 +24,7 @@
             <div class="mb-3">
                 <label for="role" class="form-label">Role</label>
                 <select class="form-select" id="role" name="role" required>
-                    <option value="" disabled selected>Pilih Role</option>
+                    <option value="" disabled>Pilih Role</option>
                     <option value="guru" {{ $user->role === 'guru' ? 'selected' : '' }}>Guru</option>
                     <option value="kepalaSekolah" {{ $user->role === 'kepalaSekolah' ? 'selected' : '' }}>Kepala Sekolah</option>
                 </select>
@@ -32,7 +32,7 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password">
                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                         <i class="bi bi-eye" id="eyeIcon"></i>
                     </button>
@@ -40,24 +40,22 @@
             </div>
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
             </div>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
     </div>
+
     <script>
         const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
+        const password = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
 
         togglePassword.addEventListener('click', function () {
-            // Toggle the type attribute
-
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            // Toggle the eye icon
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
             eyeIcon.classList.toggle('bi-eye');
             eyeIcon.classList.toggle('bi-eye-slash');
         });

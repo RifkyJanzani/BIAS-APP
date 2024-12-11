@@ -2,13 +2,13 @@
 @section('content')
     <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.akun') }}">Akun</a></li>
+            <ol class="breadcrumb bg-light rounded-3 p-2">
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.akun') }}" class="text-decoration-none text-dark fw-bold">Akun</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Tambah Akun</li>
             </ol>
         </nav>
-        <h1>Akun</h1>
+        <h1 class="mb-4">Tambah Akun</h1>
         <form action="{{ route('akun.store') }}" method="post">
             @csrf
             <div class="mb-3">
@@ -52,10 +52,8 @@
         const eyeIcon = document.getElementById('eyeIcon');
 
         togglePassword.addEventListener('click', function () {
-            // Toggle the type attribute
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
-            // Toggle the eye icon
             eyeIcon.classList.toggle('bi-eye');
             eyeIcon.classList.toggle('bi-eye-slash');
         });
