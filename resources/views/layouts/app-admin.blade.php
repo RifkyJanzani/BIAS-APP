@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
-                        <a href="/admin/akun" class="{{ request()->is('admin/akun*') ? 'selected' : '' }}">
+                        <a href="{{ route('admin.akun') }}" class="{{ request()->is('admin/akun*') ? 'selected' : '' }}">
                             <p><b>|</b></p><img src="{{ asset('images/Profile Icon.png') }}" alt="">Akun
                         </a>
                     </li>

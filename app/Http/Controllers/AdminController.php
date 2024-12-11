@@ -14,11 +14,6 @@ class AdminController extends Controller
         //
     }
 
-    public function akun()
-    {
-        return view('admin.akun');
-    }
-
     /**
      * Show the form for creating a new resource.
      */

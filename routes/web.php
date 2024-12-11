@@ -7,6 +7,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AkunController;
 
 Route::get('/', function () {
     // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
@@ -84,8 +85,14 @@ Route::prefix('admin')->middleware('auth','admin')->group(function () {
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
 
     // Akun
-    Route::get('/akun', [AdminController::class, 'akun'])->name('admin.akun');
-
+    Route::get('/akun', [AkunController::class, 'index'])->name('admin.akun');
+    Route::get('/akun/create', [AkunController::class, 'create'])->name('admin.akun.create');
+    Route::post('/akun/store', [AkunController::class, 'store'])->name('akun.store');
+    Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
+    Route::post('/akun/{id}/update', [AkunController::class, 'update'])->name('akun.update');
+    Route::put('/akun/{id}/update', [AkunController::class, 'update'])->name('akun.update');
+    Route::delete('/akun/{id}/delete', [AkunController::class, 'destroy'])->name('akun.destroy');
+    
     // Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('admin.kelas.index');
     Route::get('/kelas/{kelas}', [KelasController::class, 'show'])->name('admin.kelas.show');
