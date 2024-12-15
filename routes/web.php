@@ -34,9 +34,7 @@ Route::middleware('auth')->group(function () {
 // Grup route untuk Guru
 Route::prefix('guru')->middleware('auth','guru')->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('guru.dashboard');
-    })->name('guru.dashboard');
+    Route::get('/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
 
     // Kelas
     Route::get('/kelas', function () {
@@ -61,21 +59,14 @@ Route::prefix('guru')->middleware('auth','guru')->group(function () {
     })->name('guru.kelas.penilaian');
 
     // E-Rapor
-    Route::get('/e-rapor', function () {
-        return view('guru.e-rapor.index');
-    })->name('guru.e-rapor');
+    Route::get('/e-rapor', [GuruController::class, 'erapor'])->name('guru.e-rapor');
 
-    Route::get('/e-rapor/siswa', function () {
-        return view('guru.e-rapor.siswa');
-    })->name('guru.e-rapor.siswa');
+    Route::get('/e-rapor/siswa/{nis}', [GuruController::class, 'showSiswa'])->name('guru.e-rapor.siswa');
 
-    Route::get('/e-rapor/triwulan', function () {
-        return view('guru.e-rapor.triwulan');
-    })->name('guru.e-rapor.triwulan');
+    Route::get('/e-rapor/triwulan/{nis}', [GuruController::class, 'triwulan'])->name('guru.e-rapor.triwulan');
 
-    Route::get('/e-rapor/akhir', function () {
-        return view('guru.e-rapor.akhir');
-    })->name('guru.e-rapor.akhir');
+    Route::get('/e-rapor/akhir/{nis}', [GuruController::class, 'akhir'])->name('guru.e-rapor.akhir');
+
 });
 
 // Grup route untuk Admin

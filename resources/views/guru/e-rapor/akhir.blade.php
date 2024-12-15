@@ -73,7 +73,7 @@
 
     /* Update style untuk content wrapper */
     .content-wrapper {
-        transition: margin-left 0.3s ease-in-out;
+        /* transition: margin-left 0.3s ease-in-out; */
         margin-left: 0;
         padding-left: 15px;
         padding-right: 15px;
@@ -81,7 +81,7 @@
 
     /* Saat sidebar terbuka */
     body.sidebar-open .content-wrapper {
-        margin-left: 330px;
+        /* margin-left: 330px; */
     }
 
     /* Responsive adjustments */

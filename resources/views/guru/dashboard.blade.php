@@ -13,7 +13,7 @@
                         </div>
                         <div>
                             <p class="mb-0 text-start">Siswa</p>
-                            <h4 class="mb-0 text-start fw-bold">100</h4>
+                            <h4 class="mb-0 text-start fw-bold">{{ $totalSiswa }}</h4>
                         </div>
                     </div>
                 </div>
@@ -94,77 +94,44 @@
         <div class="card-body">
             <!-- Header -->
             <h5 class="card-title fw-bold text-dark">Siswa</h5>
-            
+
             <!-- Tabel -->
             <div class="table-responsive">
                 <table class="table table-bordered align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Nama</th>
-                            <th>NIS</th>
-                            <th>Kelas</th>
-                            <th>Umur</th>
-                            <th>Jenis Kelamin</th>
+                            <th class="ps-3" style="width: 30%;">Nama</th>
+                            <th style="width: 20%;">NIS</th>
+                            <th style="width: 20%;">Kelas</th>
+                            <th style="width: 15%;">Umur</th>
+                            <th style="width: 15%;">Jenis Kelamin</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Baris 1 -->
+                        @foreach($siswa as $s)
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Marvin McKinney
+                                    <img src="{{ $s->photo ? asset($s->photo) : asset('images/foto-siswa.jpg') }}"
+                                         alt="Foto Siswa"
+                                         class="rounded-circle me-3"
+                                         style="width: 30px; height: 30px;">
+                                    {{ $s->name }}
                                 </div>
                             </td>
-                            <td>2201169</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
+                            <td>{{ $s->nis }}</td>
+                            <td>{{ $s->kelas }}</td>
+                            <td>{{ $s->umur }}</td>
+                            <td>{{ $s->gender }}</td>
                         </tr>
-
-                        <!-- Baris 2 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Esther Howard
-                                </div>
-                            </td>
-                            <td>2209014</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
-
-                        <!-- Baris 3 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Brooklyn Simmons
-                                </div>
-                            </td>
-                            <td>2210290</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
-
-                        <!-- Baris 4 -->
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('images/foto-siswa.jpg') }}" alt="Foto Siswa" class="rounded-circle me-2" style="width: 30px; height: 30px;">
-                                    Courtney Henry
-                                </div>
-                            </td>
-                            <td>2201901</td>
-                            <td>TK A</td>
-                            <td>5</td>
-                            <td>Perempuan</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Setelah table -->
+            <div class="d-flex justify-content-center">
+                {{ $siswa->links() }}
             </div>
         </div>
     </div>
