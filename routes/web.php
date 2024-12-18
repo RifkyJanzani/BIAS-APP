@@ -7,6 +7,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
     // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
@@ -102,5 +103,7 @@ Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
         return view('kepalaSekolah.dashboard');
     })->name('kepalaSekolah.dashboard');
 });
+
+Route::get('/generate-pdf/{nis}', [PDFController::class, 'generatePDF'])->name('generate.pdf');
 
 require __DIR__.'/auth.php';
