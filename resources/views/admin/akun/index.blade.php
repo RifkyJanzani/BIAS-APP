@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light rounded-3 p-2">
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Akun</li>
+            </ol>
+        </nav>
         <h1 class="mb-4">Akun</h1>
         <div class="card shadow mb-4">
             <div class="card-body">

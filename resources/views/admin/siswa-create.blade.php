@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light rounded-3 p-2">
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.daftar') }}" class="text-decoration-none text-dark fw-bold">Daftar</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Data Siswa</li>
+        </ol>
+    </nav>
     <h1>Tambah Data Siswa</h1>
     
     <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data"> <!-- Tambahkan enctype -->

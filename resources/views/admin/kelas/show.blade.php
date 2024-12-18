@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light rounded-3 p-2">
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.kelas.index') }}" class="text-decoration-none text-dark fw-bold">Kelas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Daftar Siswa Kelas {{ $kelas }}</li>
+        </ol>
+    </nav>
+
     <h1>Daftar Siswa Kelas {{ $kelas }}</h1>
 
     @if(count($siswa) == 0)

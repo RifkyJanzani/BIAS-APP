@@ -2,7 +2,13 @@
 
 @section('content')
 <div class="container">
-    <h1>Kelas</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light rounded-3 p-2">
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Kelas</li>
+        </ol>
+    </nav>
+    <h1 class="mb-4">Kelas</h1>
     <div class="row">
         @foreach($kelas as $k)
         <div class="col-md-4">
