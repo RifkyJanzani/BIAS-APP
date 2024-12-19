@@ -8,13 +8,14 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\GeminiController;
 
 Route::get('/', function () {
     // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
     if (Auth::check()) {
         $user = Auth::user();
-           // Redirection berdasarkan role
-           if ($user->role == 'admin') {
+        // Redirection berdasarkan role
+        if ($user->role == 'admin') {
             return redirect()->route('admin.dashboard');
         } elseif ($user->role == 'guru') {
             return redirect()->route('guru.dashboard');
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Grup route untuk Guru
-Route::prefix('guru')->middleware('auth','guru')->group(function () {
+Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
     // Dashboard
     Route::get('/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
 
@@ -78,7 +79,7 @@ Route::prefix('guru')->middleware('auth','guru')->group(function () {
 });
 
 // Grup route untuk Admin
-Route::prefix('admin')->middleware('auth','admin')->group(function () {
+Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -90,7 +91,7 @@ Route::prefix('admin')->middleware('auth','admin')->group(function () {
     Route::post('/akun/{id}/update', [AkunController::class, 'update'])->name('akun.update');
     Route::put('/akun/{id}/update', [AkunController::class, 'update'])->name('akun.update');
     Route::delete('/akun/{id}/delete', [AkunController::class, 'destroy'])->name('akun.destroy');
-    
+
     // Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('admin.kelas.index');
     Route::get('/kelas/{kelas}', [KelasController::class, 'show'])->name('admin.kelas.show');
@@ -111,10 +112,20 @@ Route::prefix('admin')->middleware('auth','admin')->group(function () {
     });
 });
 
-Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
+Route::prefix('kepsek')->middleware('auth', 'kepalaSekolah')->group(function () {
     Route::get('/dashboard', function () {
         return view('kepalaSekolah.dashboard');
     })->name('kepalaSekolah.dashboard');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+// Coba Gemini
+
+// To display the view
+Route::get('/gem', function () {
+    return view('test-gemini');
+});
+
+// Handle form submission.
+Route::post('/question', [GeminiController::class, 'index']);
