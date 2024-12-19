@@ -15,7 +15,7 @@
     @if(count($siswa) == 0)
         <p>Belum ada siswa di kelas ini.</p>
     @else
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered mb-0 table-hover">
             <thead>
                 <tr>
                     <th>#</th>
