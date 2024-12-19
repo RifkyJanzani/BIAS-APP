@@ -56,7 +56,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3>Akun Guru</h3>
-                    <a href="#" class="btn btn-success">
+                    <a href="{{ route('admin.akun.create') }}" class="btn btn-success">
                         <i class="mdi mdi-plus me-1"></i>
                         Tambah Akun Guru
                     </a>

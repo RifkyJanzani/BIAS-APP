@@ -39,22 +39,16 @@ Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
     Route::get('/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
 
     // Kelas
-    Route::get('/kelas', function () {
-        return view('guru.kelas.index');
-    })->name('guru.kelas');
+    Route::get('/kelas', [GuruController::class, 'index'])->name('guru.kelas.index');
 
-    Route::get('/kelas/daftar-siswa', function () {
-        return view('guru.kelas.daftar-siswa');
-    })->name('guru.kelas.daftar-siswa');
+    Route::get('/kelas/{kelas}', [GuruController::class, 'show'])->name('guru.kelas.daftar-siswa');
 
     // Bisa pakai ini jika sudah diintegrasi backend
     // Route::get('/kelas/daftar-siswa/{nis}', function ($nis) {
     //     return view('guru.kelas.daftar-pekan', compact('id'));
     // })->name('guru.kelas.daftar-siswa');
 
-    Route::get('/kelas/daftar-siswa/{nis}', function ($nis) {
-        return view('guru.kelas.daftar-pekan', compact('nis'));
-    })->name('guru.kelas.daftar-pekan');
+    Route::get('/kelas/daftar-siswa/{nis}', [GuruController::class, 'daftarPekan'])->name('guru.kelas.daftar-pekan');
 
     Route::get('/kelas/daftar-siswa/{nis}/{bulan}/{pekan}', function ($nis, $bulan, $pekan) {
         return view('guru.kelas.penilaian', compact('nis', 'bulan', 'pekan'));
