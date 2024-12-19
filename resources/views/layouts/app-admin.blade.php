@@ -65,8 +65,8 @@
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
-                        <a href="/admin/penilaian" class="{{ request()->is('admin/penilaian*') ? 'selected' : '' }}">
-                            <i class="bi bi-pencil"></i> Penilaian
+                        <a href="{{ route ('admin.capaian.index') }}" class="{{ request()->is('admin/capaian*') ? 'selected' : '' }}">
+                            <i class="bi bi-pencil"></i> Capaian
                         </a>
                     </li>
                 </ul>
