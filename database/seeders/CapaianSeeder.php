@@ -9,21 +9,7 @@ class CapaianSeeder extends Seeder
 {
     public function run()
     {
-        // Seed some sample data for the Capaian table
-        Capaian::create([
-            'pernyataan' => 'Siswa menunjukkan perkembangan yang baik dalam motorik halus.',
-        ]);
-
-        Capaian::create([
-            'pernyataan' => 'Siswa masih perlu bimbingan dalam motorik kasar.',
-        ]);
-
-        Capaian::create([
-            'pernyataan' => 'Siswa aktif berpartisipasi dalam kegiatan kelas.',
-        ]);
-
-        Capaian::create([
-            'pernyataan' => 'Siswa sudah menunjukkan kemajuan yang signifikan.',
-        ]);
+        // Membuat 5 data Capaian menggunakan factory
+        Capaian::factory()->count(5)->create();
     }
 }

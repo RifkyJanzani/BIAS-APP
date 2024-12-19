@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Capaian;
@@ -23,6 +23,7 @@ class CapaianController extends Controller
     {
         $request->validate([
             'pernyataan' => 'required|string|max:255',
+            'format_jawaban' => 'required|in:format 1,format 2,deskripsi',
         ]);
         Capaian::create($request->all());
         return redirect()->route('admin.capaian.index')->with('success', 'Capaian berhasil ditambahkan.');
@@ -38,6 +39,7 @@ class CapaianController extends Controller
     {
         $request->validate([
             'pernyataan' => 'required|string|max:255',
+            'format_jawaban' => 'required|in:format 1,format 2,deskripsi',
         ]);
         $capaian = Capaian::findOrFail($id);
         $capaian->update($request->all());

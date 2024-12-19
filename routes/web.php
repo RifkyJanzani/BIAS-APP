@@ -8,8 +8,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AkunController;
-use App\Http\Controllers\Auth\PenilaianController;
-use App\Http\Controllers\Auth\CapaianController;
+use App\Http\Controllers\CapaianController;
 
 Route::get('/', function () {
     // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
@@ -109,12 +108,12 @@ Route::prefix('admin')->middleware('auth','admin')->group(function () {
     Route::put('/siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.destroy');
     // Capaian
-    Route::get('/capaian', [\App\Http\Controllers\Auth\CapaianController::class, 'index'])->name('admin.capaian.index');
-    Route::get('/capaian/create', [\App\Http\Controllers\Auth\CapaianController::class, 'create'])->name('admin.capaian.create');
-    Route::post('/capaian/store', [\App\Http\Controllers\Auth\CapaianController::class, 'store'])->name('admin.capaian.store');
-    Route::get('/capaian/{id}/edit', [\App\Http\Controllers\Auth\CapaianController::class, 'edit'])->name('admin.capaian.edit');
-    Route::put('/capaian/{id}/update', [\App\Http\Controllers\Auth\CapaianController::class, 'update'])->name('admin.capaian.update');
-    Route::delete('/capaian/{id}/delete', [\App\Http\Controllers\Auth\CapaianController::class, 'destroy'])->name('admin.capaian.destroy');
+    Route::get('/capaian', [CapaianController::class, 'index'])->name('admin.capaian.index');
+    Route::get('/capaian/create', [CapaianController::class, 'create'])->name('admin.capaian.create');
+    Route::post('/capaian/store', [CapaianController::class, 'store'])->name('admin.capaian.store');
+    Route::get('/capaian/{id}/edit', [CapaianController::class, 'edit'])->name('admin.capaian.edit');
+    Route::put('/capaian/{id}/update', [CapaianController::class, 'update'])->name('admin.capaian.update');
+    Route::delete('/capaian/{id}/delete', [CapaianController::class, 'destroy'])->name('admin.capaian.destroy');
 });
 
 Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
