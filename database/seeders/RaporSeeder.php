@@ -15,8 +15,8 @@ class RaporSeeder extends Seeder
     {
         DB::table('rapors')->insert([
             [
-                'nis' => '101232730143230024',
-                'nama_siswa' => 'Tes Anak',
+                'nis' => '101232730143240001',
+                'nama_siswa' => 'Abil Rafil Khairul',
                 'kelas' => 'B ',
                 'semester' => '1',
                 'tahun_ajaran' => '2024/2025',
