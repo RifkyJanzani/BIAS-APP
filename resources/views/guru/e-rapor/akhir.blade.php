@@ -5,42 +5,84 @@
     <div class="container py-4">
         <!-- Back button dan nama siswa -->
         <div class="d-flex align-items-center mb-4">
-            <a href="{{ route('guru.e-rapor.siswa') }}" class="text-decoration-none text-dark">
+            <a href="{{ route('guru.e-rapor.siswa', $siswa->nis) }}" class="text-decoration-none text-dark">
                 <div class="d-flex align-items-center">
-                    <i class="bi bi-arrow-left-circle-fill fs-4 me-2"></i>
-                    <h4 class="mb-0">Marvin McKinney / Rapor Akhir</h4>
+                    <i class="bi bi-arrow-left-circle-fill fs-2 me-4"></i>
+                    <h4 class="mb-0 fs-3">{{ $siswa->name }} / Rapor Akhir</h4>
                 </div>
             </a>
         </div>
 
         <!-- Card Rapor -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <!-- Informasi Siswa -->
-                <div class="mb-4">
-                    <p class="mb-1"><strong>Nama:</strong> Marvin McKinney</p>
-                    <p class="mb-1"><strong>Kelas:</strong> A</p>
-                    <p class="mb-1"><strong>NIS:</strong> 2201169</p>
+        <div class="row g-4">
+            <!-- Data Siswa Card -->
+            <div class="col-md-3">
+                <div class="card shadow-sm" style="height: auto; border-radius: 10px;">
+                    <div class="card-body text-center" style="padding: 30px 5px;">
+                        <!-- Foto Siswa -->
+                        <img src="{{ $siswa->photo ? asset($siswa->photo) : asset('images/foto-siswa.jpg') }}" alt="Foto Siswa"
+                             class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+
+                        <!-- Data Siswa tanpa label -->
+                        <h5 class="mb-1">{{ $siswa->name }}</h5>
+                        <p class="mb-1 text-secondary">Kelas {{ $siswa->kelas }}</p>
+                        <p class="mb-0 text-secondary">{{ $siswa->nis }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <!-- Card Nilai Agama dan Budi Pekerti -->
+                <div class="card shadow-sm mb-4" style="border-radius: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Nilai Agama dan Budi Pekerti</h5>
+                        <div>
+                            <p class="mb-2"><strong>Capaian Belajar:</strong></p>
+                            <p class="text-justify">
+                                Ananda menunjukkan perkembangan yang baik dalam memahami nilai-nilai agama
+                                dan budi pekerti. Mampu menerapkan sikap hormat, sopan santun, dan
+                                menunjukkan perilaku yang sesuai dengan ajaran agama dalam kehidupan sehari-hari.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Capaian Belajar -->
-                <div>
-                    <p class="mb-2"><strong>Capaian Belajar:</strong></p>
-                    <p class="text-justify">
-                        Selama periode ini, menunjukkan perkembangan yang sangat baik di berbagai
-                        aspek. Pada aspek kognitif, Dita sudah mampu mengenali huruf-huruf awal
-                        abjad dan dapat menghitung hingga angka 20 dengan lancar. Ia juga dapat
-                        mengelompokkan objek berdasarkan warna dan bentuk secara tepat. Pada
-                        aspek motorik, Dita semakin terampil dalam berlari, melompat, dan bermain
-                        lompat tali.
-                    </p>
+                <!-- Card Jati Diri -->
+                <div class="card shadow-sm mb-4" style="border-radius: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Jati Diri</h5>
+                        <div>
+                            <p class="mb-2"><strong>Capaian Belajar:</strong></p>
+                            <p class="text-justify">
+                                Ananda menunjukkan perkembangan yang baik dalam pembentukan jati diri.
+                                Mampu mengekspresikan diri dengan percaya diri, menunjukkan kemandirian,
+                                dan memiliki kesadaran akan identitas dirinya sebagai individu yang unik.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Dasar-dasar Literasi dan STEAM -->
+                <div class="card shadow-sm mb-4" style="border-radius: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Dasar-dasar Literasi dan STEAM</h5>
+                        <div>
+                            <p class="mb-2"><strong>Capaian Belajar:</strong></p>
+                            <p class="text-justify">
+                                Ananda menunjukkan perkembangan yang baik dalam pemahaman dasar literasi
+                                dan STEAM. Mampu mengenal huruf, angka, dan konsep dasar sains. Menunjukkan
+                                ketertarikan dalam eksplorasi dan eksperimen sederhana.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Tombol Buat PDF -->
         <div class="d-flex justify-content-end">
-            <button class="btn btn-dark px-4">
+            <button class="btn btn-danger px-4 py-2">
+                <img src="{{ asset('images/pdf-icon.png') }}" alt="PDF Icon" style="width: 20px; height: 20px; object-fit: cover;" class="me-2">
                 BUAT PDF
             </button>
         </div>
@@ -73,7 +115,6 @@
 
     /* Update style untuk content wrapper */
     .content-wrapper {
-        transition: margin-left 0.3s ease-in-out;
         margin-left: 0;
         padding-left: 15px;
         padding-right: 15px;
@@ -81,7 +122,7 @@
 
     /* Saat sidebar terbuka */
     body.sidebar-open .content-wrapper {
-        margin-left: 330px;
+        /* margin-left: 330px; */
     }
 
     /* Responsive adjustments */
