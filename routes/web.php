@@ -43,9 +43,9 @@ Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
 
     Route::get('/kelas/{kelas}', [GuruController::class, 'show'])->name('guru.kelas.daftar-siswa');
 
-    Route::get('/kelas/daftar-siswa/{nis}', [GuruController::class, 'daftarPekan'])->name('guru.kelas.daftar-pekan');
+    Route::get('/kelas/siswa/{nis}', [GuruController::class, 'daftarPekan'])->name('guru.kelas.daftar-pekan');
 
-    Route::get('/kelas/daftar-siswa/{nis}/{bulan}/{pekan}', [GuruController::class, 'penilaian'])->name('guru.kelas.penilaian');
+    Route::get('/kelas/siswa/{nis}/{bulan}/{pekan}', [GuruController::class, 'penilaian'])->name('guru.kelas.penilaian');
 
     // E-Rapor
     Route::get('/e-rapor', function () {
