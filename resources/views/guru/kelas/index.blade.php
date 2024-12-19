@@ -1,59 +1,35 @@
 @extends('layouts.app-guru')
 
 @section('content')
-<div class="container py-4">
-    <!-- Title and Search Bar Section -->
-    <div class="row mb-4">
-        <div class="col-md-6 col-lg-4">
-            <div class="input-group">
-                <span class="input-group-text bg-white border-end-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-muted" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                </span>
-                <input type="text" class="form-control border-start-0 ps-0"
-                    placeholder="Cari Kelas" aria-label="Cari Kelas">
-            </div>
-        </div>
-    </div>
-    <h3 style="font-weight: bold; margin-right: 20px; padding: 30px 0;">Kelas</h3>
-
-    <!-- Class Cards Section -->
-    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #e0e0e0;">
-        <h4 style="font-weight: bold;">Kelas Saya</h4>
-        <div class="row mt-3">
-            <!-- Card for TK A -->
-            <div class="col-md-6">
-                <div class="card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 100%; max-width: 600px; margin: auto;">
-                    <img src="https://placehold.co/600x300" class="card-img-top" alt="Kelas TK A" style="border-top-left-radius: 10px; border-top-right-radius: 10px; width: 100%; height: auto; object-fit: cover;">
-                    <div class="card-body" onclick="window.location='{{ route('guru.kelas.daftar-siswa') }}'">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 style="font-weight: bold; margin: 0;">TK A</h5>
-                            <div class="d-flex align-items-center" style="font-size: 0.9em; color: #888;">
-                                <img src="{{ asset('images/Kelas Icon.svg') }}" alt="Jumlah siswa" style="width: 20px; height: 20px;" class="me-2">
-                                <span>36</span>
-                            </div>
-                        </div>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light rounded-3 p-2">
+            <li class="breadcrumb-item"><a href="{{ route('guru.dashboard') }}" class="text-decoration-none text-dark fw-bold">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Kelas</li>
+        </ol>
+    </nav>
+    <h1 class="mb-4">Kelas</h1>
+    <div class="row">
+        @foreach($kelas as $k)
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="{{ asset('images/kelas-default.jpg') }}" class="card-img-top" alt="Gambar Kelas">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ $k->kelas ?? 'Kelas Kosong' }}</h5>
+                    <div class="d-flex align-items-center">
+                        <img src="{{ asset('images/Kelas Icon.svg') }}" alt="Jumlah siswa" style="width: 20px; height: 20px;" class="me-2">
+                        <span>{{ $k->jumlah }}</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Card for TK B -->
-            <div class="col-md-6">
-                <div class="card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 100%; max-width: 600px; margin: auto;">
-                    <img src="https://placehold.co/600x300" class="card-img-top" alt="Kelas TK B" style="border-top-left-radius: 10px; border-top-right-radius: 10px; width: 100%; height: auto; object-fit: cover;">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 style="font-weight: bold; margin: 0;">TK B</h5>
-                            <div class="d-flex align-items-center" style="font-size: 0.9em; color: #888;">
-                                <img src="{{ asset('images/Kelas Icon.svg') }}" alt="Jumlah siswa" style="width: 20px; height: 20px;" class="me-2">
-                                <span>36</span>
-                            </div>
-                        </div>
-                    </div>
+                    @if($k->kelas)
+                    <a href="{{ route('guru.kelas.daftar-siswa', $k->kelas) }}" class="btn btn-primary">Lihat Siswa</a>
+                    @else
+                    <button class="btn btn-secondary" disabled>Kelas Kosong</button>
+                    @endif
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
+    {{-- <a href="#" class="btn btn-dark mt-3">+ Kelas Baru</a> --}}
 </div>
 @endsection
