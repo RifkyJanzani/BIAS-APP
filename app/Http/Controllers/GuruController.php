@@ -85,6 +85,34 @@ class GuruController extends Controller
         ]);
     }
 
+    public function erapor()
+    {
+        $siswa = Siswa::paginate(10);
+        return view('guru.e-rapor.index', compact('siswa'));
+    }
+
+    public function showSiswa($nis)
+    {
+        $siswa = Siswa::where('nis', $nis)->firstOrFail();
+        return view('guru.e-rapor.siswa', compact('siswa'));
+    }
+
+    public function triwulan($nis)
+    {
+        $siswa = Siswa::where('nis', $nis)->firstOrFail();
+        $rapor = Rapor::where('nis', $nis)->where('periode', 'Triwulan')->first();
+
+        return view('guru.e-rapor.triwulan', compact('siswa', 'rapor'));
+    }
+
+    public function akhir($nis)
+    {
+        $siswa = Siswa::where('nis', $nis)->firstOrFail();
+        $rapor = Rapor::where('nis', $nis)->where('periode', 'Akhir')->first();
+
+        return view('guru.e-rapor.akhir', compact('siswa', 'rapor'));
+    }
+
     public function eraporPilihan($nis)
     {
         $siswa = Siswa::where('nis', $nis)->firstOrFail();
