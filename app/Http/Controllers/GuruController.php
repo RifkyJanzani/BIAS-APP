@@ -85,7 +85,7 @@ class GuruController extends Controller
         ]);
     }
 
-    public function eraporPilihan($id)
+    public function eraporPilihan($nis)
     {
         $siswa = Siswa::where('nis', $nis)->firstOrFail();
         $rapor = Rapor::where('nis', $nis)->where('periode', 'Akhir')->first();
