@@ -15,7 +15,7 @@
                     <h3>Akun Kepala Sekolah</h3>
                     <a href="{{ route('admin.akun.create') }}" class="btn btn-success">
                         <i class="mdi mdi-plus me-1"></i>
-                        Tambah Akun Kepala Sekolah
+                        Tambah Akun
                     </a>
                 </div>
                 <div class="table-responsive">
@@ -64,7 +64,7 @@
                     <h3>Akun Guru</h3>
                     <a href="#" class="btn btn-success">
                         <i class="mdi mdi-plus me-1"></i>
-                        Tambah Akun Guru
+                        Tambah Akun
                     </a>
                 </div>
                 <div class="table-responsive" style="cursor: default">

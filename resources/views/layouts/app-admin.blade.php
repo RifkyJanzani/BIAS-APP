@@ -42,31 +42,31 @@
                 <h3 class="offcanvas-title" id="offcanvasScrollingLabel"><b>BIAS App</b></h3>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div class="offcanvas-body" style="padding-left: 20px;">
                 <ul class="nav-list">
                     <li data-bs-dismiss="offcanvas">
                         <a href="/admin/dashboard" class="{{ request()->is('admin/dashboard*') ? 'selected' : '' }}">
-                            <p><b>|</b></p><img src="{{ asset('images/Dashboard Icon.svg') }}" alt="">Dashboard
+                            <i class="bi bi-house"></i> Dashboard
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
                         <a href="{{ route('admin.akun') }}" class="{{ request()->is('admin/akun*') ? 'selected' : '' }}">
-                            <p><b>|</b></p><img src="{{ asset('images/Profile Icon.png') }}" alt="">Akun
+                            <i class="bi bi-person"></i> Akun
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
                         <a href="/admin/kelas" class="{{ request()->is('admin/kelas*') ? 'selected' : '' }}">
-                            <p><b>|</b></p><img src="{{ asset('images/Kelas Icon.svg') }}" alt="">Kelas
+                            <i class="bi bi-book"></i> Kelas
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
                         <a href="/admin/daftar" class="{{ request()->is('admin/daftar*') ? 'selected' : '' }}">
-                            <p><b>|</b></p><img src="{{ asset('images/Daftar Icon.svg') }}" alt="">Daftar
+                            <i class="bi bi-list-check"></i> Daftar
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
                         <a href="/admin/penilaian" class="{{ request()->is('admin/penilaian*') ? 'selected' : '' }}">
-                            <p><b>|</b></p><img src="{{ asset('images/E-Rapor Icon.svg') }}" alt="">Penilaian
+                            <i class="bi bi-pencil"></i> Penilaian
                         </a>
                     </li>
                 </ul>
