@@ -13,7 +13,7 @@
         <div class="d-flex align-items-center mb-4">
             <a href="{{ route('guru.e-rapor') }}" class="text-decoration-none text-dark">
                 <div class="d-flex align-items-center">
-                    <i class="bi bi-arrow-left-circle-fill fs-2 me-2"></i>
+                    <i class="bi bi-arrow-left-circle-fill fs-2 me-4"></i>
                     <h4 class="mb-0 fs-3">{{ $siswa->name }}</h4>
                 </div>
             </a>

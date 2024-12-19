@@ -1,14 +1,14 @@
-@extends('layouts.app-guru')
+@extends('layouts.app-kepsek')
 
 @section('content')
 <div class="content-wrapper">
     <div class="container py-4">
         <!-- Back button dan nama siswa -->
         <div class="d-flex align-items-center mb-4">
-            <a href="{{ route('guru.e-rapor.siswa', $siswa->nis) }}" class="text-decoration-none text-dark">
+            <a href="{{ route('kepsek.e-rapor') }}" class="text-decoration-none text-dark">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-arrow-left-circle-fill fs-2 me-4"></i>
-                    <h4 class="mb-0 fs-3">{{ $siswa->name }} / Rapor Akhir</h4>
+                    <h4 class="mb-0 fs-3">{{ $siswa->name }} / Rapor Triwulan</h4>
                 </div>
             </a>
         </div>
@@ -109,6 +109,7 @@
 
     /* Update style untuk content wrapper */
     .content-wrapper {
+        /* transition: margin-left 0.3s ease-in-out; */
         margin-left: 0;
         padding-left: 15px;
         padding-right: 15px;
