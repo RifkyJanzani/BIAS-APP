@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 
@@ -8,7 +9,8 @@ use Illuminate\Http\Request;
 
 class GuruController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $kelas = Siswa::select('kelas', DB::raw('COUNT(*) as jumlah'))
             ->groupBy('kelas')
             ->get();
@@ -32,7 +34,7 @@ class GuruController extends Controller
         // if ($kelasDipilih) {
         //     $siswa = Siswa::where('kelas', $kelasDipilih)->get();
         // } else {
-            
+
         // }
 
         $siswa = Siswa::all();
@@ -64,10 +66,28 @@ class GuruController extends Controller
         ]);
     }
 
+    public function penilaian($nis, $bulan, $pekan)
+    {
+        // Ambil data siswa berdasarkan NIS
+        $siswa = Siswa::where('nis', $nis)->first();
+
+        // Periksa apakah data siswa ditemukan
+        if (!$siswa) {
+            abort(404, 'Siswa tidak ditemukan');
+        }
+
+        // Kirim data siswa ke view
+        return view('guru.kelas.penilaian', [
+            'nis' => $siswa->nis,
+            'nama' => $siswa->name,
+            'bulan' => $bulan,
+            'pekan' => $pekan,
+        ]);
+    }
+
     public function eraporPilihan($id)
     {
         // Ambil data siswa berdasarkan ID
         return view('guru.e-rapor-pilihan');
     }
-
-} 
+}

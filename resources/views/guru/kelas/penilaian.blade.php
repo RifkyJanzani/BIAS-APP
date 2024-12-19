@@ -8,7 +8,7 @@
             <a href="javascript:void(0);" onclick="window.history.back()" class="text-decoration-none text-dark">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-arrow-left-circle-fill fs-4 me-2"></i>
-                    <h4 class="mb-0">Marvin McKinney / Bulan {{ ucfirst($bulan) }}, Pekan ke {{ $pekan }}</h4>
+                    <h4 class="mb-0">{{ $nama }} / Bulan {{ ucfirst($bulan) }}, Pekan ke {{ $pekan }}</h4>
                 </div>
             </a>
         </div>
