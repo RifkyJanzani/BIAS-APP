@@ -31,36 +31,42 @@
                         <table class="table custom-striped mb-0">
                             <thead>
                                 <tr class="table-light">
-                                    <th class="ps-3">Nama</th>
-                                    <th>NIS</th>
-                                    <th>Kelas</th>
-                                    <th>Umur</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th class="ps-3" style="width: 30%;">Nama</th>
+                                    <th style="width: 20%;">NIS</th>
+                                    <th style="width: 20%;">Kelas</th>
+                                    <th style="width: 15%;">Umur</th>
+                                    <th style="width: 15%;">Jenis Kelamin</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach(range(1, 15) as $index)
-                                <tr style="cursor: pointer" onclick="window.location='{{ route('guru.e-rapor.siswa') }}'">
+                                @foreach($siswa as $s)
+                                <tr style="cursor: pointer" onclick="window.location='{{ route('guru.e-rapor.siswa', $s->nis) }}'">
                                     <td class="ps-3">
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-wrapper me-2">
-                                                <img src="{{ asset('images/foto-siswa.jpg') }}"
-                                                    class="avatar-image"
-                                                    alt="Avatar">
+                                                <img src="{{ asset($s->photo) }}"
+                                                     class="avatar-image"
+                                                     alt="Avatar"
+                                                     onerror="this.src='{{ asset('images/foto-siswa.jpg') }}'">
                                             </div>
-                                            <span>Marvin McKinney</span>
+                                            <span>{{ $s->name }}</span>
                                         </div>
                                     </td>
-                                    <td>2201169</td>
-                                    <td>TK A</td>
-                                    <td>5</td>
-                                    <td>Laki-laki</td>
+                                    <td>{{ $s->nis }}</td>
+                                    <td>{{ $s->kelas }}</td>
+                                    <td>{{ $s->umur }}</td>
+                                    <td>{{ $s->gender }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center mt-4">
+                {{ $siswa->links() }}
             </div>
         </div>
     </div>
@@ -121,7 +127,7 @@
 
         /* Update style untuk content wrapper */
         .content-wrapper {
-            transition: margin-left 0.3s ease-in-out;
+            /* transition: margin-left 0.3s ease-in-out; */
             margin-left: 0;
             padding-left: 15px;
             padding-right: 15px;
@@ -129,7 +135,7 @@
 
         /* Saat sidebar terbuka */
         body.sidebar-open .content-wrapper {
-            margin-left: 330px; /* Sesuaikan dengan lebar offcanvas */
+            /* margin-left: 330px; */
         }
 
         /* Responsive adjustments */

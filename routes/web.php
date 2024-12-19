@@ -7,6 +7,8 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\KepsekController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\CapaianController;
 use App\Http\Controllers\GeminiController;
@@ -49,21 +51,14 @@ Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
     Route::get('/kelas/siswa/{nis}/{bulan}/{pekan}', [GuruController::class, 'penilaian'])->name('guru.kelas.penilaian');
 
     // E-Rapor
-    Route::get('/e-rapor', function () {
-        return view('guru.e-rapor.index');
-    })->name('guru.e-rapor');
+    Route::get('/e-rapor', [GuruController::class, 'erapor'])->name('guru.e-rapor');
 
-    Route::get('/e-rapor/siswa', function () {
-        return view('guru.e-rapor.siswa');
-    })->name('guru.e-rapor.siswa');
+    Route::get('/e-rapor/siswa/{nis}', [GuruController::class, 'showSiswa'])->name('guru.e-rapor.siswa');
 
-    Route::get('/e-rapor/triwulan', function () {
-        return view('guru.e-rapor.triwulan');
-    })->name('guru.e-rapor.triwulan');
+    Route::get('/e-rapor/triwulan/{nis}', [GuruController::class, 'triwulan'])->name('guru.e-rapor.triwulan');
 
-    Route::get('/e-rapor/akhir', function () {
-        return view('guru.e-rapor.akhir');
-    })->name('guru.e-rapor.akhir');
+    Route::get('/e-rapor/akhir/{nis}', [GuruController::class, 'akhir'])->name('guru.e-rapor.akhir');
+
 });
 
 // Grup route untuk Admin
@@ -102,11 +97,19 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     Route::delete('/capaian/{id}/delete', [CapaianController::class, 'destroy'])->name('admin.capaian.destroy');
 });
 
-Route::prefix('kepsek')->middleware('auth', 'kepalaSekolah')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('kepalaSekolah.dashboard');
-    })->name('kepalaSekolah.dashboard');
+Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
+    Route::get('/dashboard', [KepsekController::class, 'dashboard'])->name('kepalaSekolah.dashboard');
+    Route::get('/siswa', [KepsekController::class, 'siswa'])->name('kepalaSekolah.siswa');
+    Route::get('/guru', [KepsekController::class, 'guru'])->name('kepalaSekolah.guru');
+
+    Route::get('/e-rapor', [KepsekController::class, 'erapor'])->name('kepsek.e-rapor');
+
+    Route::get('/e-rapor/triwulan/{nis}', [KepsekController::class, 'triwulan'])->name('kepsek.e-rapor.triwulan');
+
+    Route::get('/e-rapor/akhir/{nis}', [KepsekController::class, 'akhir'])->name('kepsek.e-rapor.akhir');
 });
+
+Route::get('/generate-pdf/{nis}', [PDFController::class, 'generatePDF'])->name('generate.pdf');
 
 require __DIR__ . '/auth.php';
 
