@@ -8,6 +8,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\CapaianController;
 use App\Http\Controllers\GeminiController;
 
 Route::get('/', function () {
@@ -92,11 +93,13 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     Route::post('/siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
     Route::put('/siswa/{id}/update', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{id}/delete', [SiswaController::class, 'destroy'])->name('siswa.destroy');
-
-    // Penilaian
-    Route::get('/penilaian', function () {
-        return view('admin.penilaian');
-    });
+    // Capaian
+    Route::get('/capaian', [CapaianController::class, 'index'])->name('admin.capaian.index');
+    Route::get('/capaian/create', [CapaianController::class, 'create'])->name('admin.capaian.create');
+    Route::post('/capaian/store', [CapaianController::class, 'store'])->name('admin.capaian.store');
+    Route::get('/capaian/{id}/edit', [CapaianController::class, 'edit'])->name('admin.capaian.edit');
+    Route::put('/capaian/{id}/update', [CapaianController::class, 'update'])->name('admin.capaian.update');
+    Route::delete('/capaian/{id}/delete', [CapaianController::class, 'destroy'])->name('admin.capaian.destroy');
 });
 
 Route::prefix('kepsek')->middleware('auth', 'kepalaSekolah')->group(function () {

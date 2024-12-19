@@ -80,7 +80,7 @@
         <!-- Tabel -->
             @if($siswa->isNotEmpty())
             <div class="table-responsive">
-                <table class="table table-bordered align-middle">
+                <table class="table table-striped table-bordered mb-0 table-hover">
                     <thead class="table-light">
                         <tr>
                             <th>Foto</th>
