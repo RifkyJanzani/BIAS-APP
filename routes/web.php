@@ -35,9 +35,7 @@ Route::middleware('auth')->group(function () {
 // Grup route untuk Guru
 Route::prefix('guru')->middleware('auth','guru')->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('guru.dashboard');
-    })->name('guru.dashboard');
+    Route::get('/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
 
     // Kelas
     Route::get('/kelas', function () {
