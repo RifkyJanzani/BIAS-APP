@@ -24,7 +24,7 @@
                         <td>{{ $item->pernyataan }}</td>
                         <td>{{ $item->format_jawaban }}</td>
                         <td>
-                            <a href="{{ route('admin.capaian.edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{ route('admin.capaian.edit', $item->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
                             <form action="{{ route('admin.capaian.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -48,7 +48,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus akun ini?
+                    Apakah Anda yakin ingin menghapus penilaian ini?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
