@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('rapors', function (Blueprint $table) {
             $table->id('raporID');
             $table->string('nis');
-            $table->string('nama_siswa');
-            $table->string('kelas');
             $table->string('semester');
             $table->string('tahun_ajaran');
             $table->string('periode');

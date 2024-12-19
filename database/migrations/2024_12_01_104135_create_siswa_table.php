@@ -10,11 +10,11 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->string('nis')->unique();
-            $table->string('name');
-            $table->string('kelas');
-            $table->integer('umur');
-            $table->string('gender'); // Misalnya "Laki-laki" atau "Perempuan"
+            $table->string('nis')->unique()->nullable();
+            $table->string('name')->nullable();
+            $table->string('kelas')->nullable();
+            $table->integer('umur')->nullable();
+            $table->string('gender')->nullable(); // Misalnya "Laki-laki" atau "Perempuan"
             $table->timestamps();
         });
     }
