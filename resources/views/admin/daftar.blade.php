@@ -25,8 +25,8 @@
 
                 <!-- Tabel Data -->
                 @if(isset($siswa) && $siswa->isNotEmpty())
-                    <div class="table-responsive">
-                        <table class="table table-bordered align-middle">
+                    <div class="table-responsive" style="cursor: default">
+                        <table class="table table-striped table-bordered mb-0 table-hover">
                             <thead class="table-light">
                                 <tr>
                                     <th></th>

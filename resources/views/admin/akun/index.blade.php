@@ -19,12 +19,12 @@
                     </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered mb-0">
+                    <table class="table table-striped table-bordered mb-0 table-hover">
                         <thead>
                             <tr>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th class="text-center">Aksi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,12 +35,18 @@
                                     {{ $kepsek->name }}
                                 </td>
                                 <td onclick="window.location='{{ route('akun.edit', $kepsek->id) }}'" style="cursor: pointer;">{{ $kepsek->email }}</td>
-                                <td class="text-center">
-                                    <form action="{{ route('akun.destroy', $kepsek->id) }}" method="post" class="delete-form">
+                                <td >
+                                    <!-- Tombol Edit -->
+                                    <a href="{{ route('akun.edit', $kepsek->id) }}" class="btn btn-primary btn-sm me-2">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    
+                                    <!-- Tombol Hapus -->
+                                    <form action="{{ route('akun.destroy', $kepsek->id) }}" method="POST" class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-link text-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="{{ $kepsek->id }}">
-                                            <i class="mdi mdi-delete"></i>
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="{{ $kepsek->id }}">
+                                            <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -61,13 +67,13 @@
                         Tambah Akun Guru
                     </a>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered mb-0">
+                <div class="table-responsive" style="cursor: default">
+                    <table class="table table-striped table-bordered mb-0 table-hover">
                         <thead>
                             <tr>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th class="text-center">Aksi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,12 +84,18 @@
                                     {{ $guru->name }}
                                 </td>
                                 <td onclick="window.location='{{ route('akun.edit', $guru->id) }}'" style="cursor: pointer;">{{ $guru->email }}</td>
-                                <td class="text-center">
-                                    <form action="{{ route('akun.destroy', $guru->id) }}" method="post" class="delete-form">
+                                <td>
+                                    <!-- Tombol Edit -->
+                                    <a href="{{ route('akun.edit', $guru->id) }}" class="btn btn-primary btn-sm me-2">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    
+                                    <!-- Tombol Hapus -->
+                                    <form action="{{ route('akun.destroy', $guru->id) }}" method="POST" class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-link text-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="{{ $guru->id }}">
-                                            <i class="mdi mdi-delete"></i>
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="{{ $guru->id }}">
+                                            <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 </td>
