@@ -8,6 +8,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\KepsekController;
 
 Route::get('/', function () {
     // Jika pengguna sudah login, arahkan ke dashboard berdasarkan role
@@ -99,9 +100,15 @@ Route::prefix('admin')->middleware('auth','admin')->group(function () {
 });
 
 Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('kepalaSekolah.dashboard');
-    })->name('kepalaSekolah.dashboard');
+    Route::get('/dashboard', [KepsekController::class, 'dashboard'])->name('kepalaSekolah.dashboard');
+    Route::get('/siswa', [KepsekController::class, 'siswa'])->name('kepalaSekolah.siswa');
+    Route::get('/guru', [KepsekController::class, 'guru'])->name('kepalaSekolah.guru');
+
+    Route::get('/e-rapor', [KepsekController::class, 'erapor'])->name('kepsek.e-rapor');
+
+    Route::get('/e-rapor/triwulan/{nis}', [KepsekController::class, 'triwulan'])->name('kepsek.e-rapor.triwulan');
+
+    Route::get('/e-rapor/akhir/{nis}', [KepsekController::class, 'akhir'])->name('kepsek.e-rapor.akhir');
 });
 
 Route::get('/generate-pdf/{nis}', [PDFController::class, 'generatePDF'])->name('generate.pdf');
