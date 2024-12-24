@@ -50,6 +50,15 @@ Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
 
     Route::get('/kelas/siswa/{nis}/{bulan}/{pekan}', [GuruController::class, 'penilaian'])->name('guru.kelas.penilaian');
 
+    // submit capaian
+    Route::post('/kelas/siswa/store', [GuruController::class, 'submitPenilaian'])->name('submit.penilaian');
+
+    //update capaian
+    Route::put('/kelas/siswa/update', [GuruController::class, 'updatePenilaian'])->name('update.penilaian');
+
+    // generate gemini
+    Route::post('/kelas/siswa/generateTriwulan', [GeminiController::class, 'generateRapor'])->name('generateRaporTriwulan.gemini');
+
     // E-Rapor
     Route::get('/e-rapor', [GuruController::class, 'erapor'])->name('guru.e-rapor');
 
@@ -58,7 +67,6 @@ Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
     Route::get('/e-rapor/triwulan/{nis}', [GuruController::class, 'triwulan'])->name('guru.e-rapor.triwulan');
 
     Route::get('/e-rapor/akhir/{nis}', [GuruController::class, 'akhir'])->name('guru.e-rapor.akhir');
-
 });
 
 // Grup route untuk Admin
@@ -97,7 +105,7 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     Route::delete('/capaian/{id}/delete', [CapaianController::class, 'destroy'])->name('admin.capaian.destroy');
 });
 
-Route::prefix('kepsek')->middleware('auth','kepalaSekolah')->group(function () {
+Route::prefix('kepsek')->middleware('auth', 'kepalaSekolah')->group(function () {
     Route::get('/dashboard', [KepsekController::class, 'dashboard'])->name('kepalaSekolah.dashboard');
     Route::get('/siswa', [KepsekController::class, 'siswa'])->name('kepalaSekolah.siswa');
     Route::get('/guru', [KepsekController::class, 'guru'])->name('kepalaSekolah.guru');

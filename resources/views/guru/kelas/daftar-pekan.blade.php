@@ -38,7 +38,7 @@
                                     <div class="d-grid gap-0">
                                         @for($week = 1; $week <= 4; $week++)
                                             <a href="{{ route('guru.kelas.penilaian', ['nis' => $nis, 'bulan' => strtolower($month), 'pekan' => $week]) }}" class="btn btn-light text-start py-2 mb-2">
-                                                Pekan {{ $week }}
+                                                Pekan {{ $week }}<span class="float-end">{{ $penilaian->where('bulan', strtolower($month))->where('pekan', $week)->count() > 0 ? '✅' : '' }}</span>
                                             </a>
                                         @endfor
                                     </div>

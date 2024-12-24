@@ -8,13 +8,8 @@
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
         "@tailwindcss/forms": "^0.5.2",
-<<<<<<< Updated upstream
         "alpinejs": "^3.14.7",
         "autoprefixer": "^10.4.2",
-=======
-        "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.20",
->>>>>>> Stashed changes
         "axios": "^1.7.4",
         "bootstrap": "^5.3.3",
         "concurrently": "^9.0.1",
