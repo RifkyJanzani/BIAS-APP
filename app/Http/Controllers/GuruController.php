@@ -10,7 +10,6 @@ use App\Models\Rapor;
 use Illuminate\Http\Request;
 use GeminiAPI\Client;
 use GeminiAPI\Resources\Parts\TextPart;
-use App\Models\RaporTest;
 
 class GuruController extends Controller
 {
@@ -79,13 +78,20 @@ class GuruController extends Controller
         $siswa = Siswa::where('nis', $nis)->first();
         $capaian = Capaian::all();
         $penilaian = PenilaianSiswa::where('nis', $nis)->where('bulan', $bulan)->where('pekan', $pekan)->get();
+        // $capaianAgama = Capaian::where('kriteria', 'Nilai Agama dan Budi Pekerti')->get();
+        // $capaianJatiDiri = Capaian::where('kriteria', 'Jati Diri')->get();
+        // $capaianLiterasi = Capaian::where('kriteria', 'Dasar Literasi dan STEAM')->get();
+        $kriterias = Capaian::distinct()->get(['kriteria']);
+        $kriterias = $kriterias->pluck('kriteria')->toArray();
+        $capaianBulanCount = PenilaianSiswa::select('bulan')->where('nis', $siswa->nis)->distinct()->get()->count();
+        $capaianCount = PenilaianSiswa::select('bulan', 'pekan')->where('nis', $siswa->nis)->distinct()->get()->count();
         // Periksa apakah data siswa ditemukan
         if (!$siswa) {
             abort(404, 'Siswa tidak ditemukan');
         }
 
         // Kirim data siswa ke view
-        return view('guru.kelas.penilaian', compact('capaian', 'penilaian'), [
+        return view('guru.kelas.penilaian', compact('capaian', 'penilaian', 'kriterias', 'capaianBulanCount', 'capaianCount'), [
             'nis' => $siswa->nis,
             'nama' => $siswa->name,
             'bulan' => $bulan,
@@ -98,6 +104,8 @@ class GuruController extends Controller
         // Mengambil data siswa berdasarkan NIS
         $siswa = Siswa::where('nis', $request->input('nis'))->first();
         $capaians = Capaian::all();
+        $kriterias = Capaian::distinct()->get(['kriteria']);
+        $kriterias = $kriterias->pluck('kriteria')->toArray();
 
         // Periksa apakah data siswa ditemukan
         if (!$siswa) {
@@ -133,7 +141,8 @@ class GuruController extends Controller
         $capaianBulanCount = PenilaianSiswa::select('bulan')->where('nis', $siswa->nis)->distinct()->get()->count();
         $capaianCount = PenilaianSiswa::select('bulan', 'pekan')->where('nis', $siswa->nis)->distinct()->get()->count();
         // dd($capaianCount);
-        if ($capaianBulanCount >= 3 && $capaianCount >= 12) {
+        if ($capaianBulanCount == 3 && $capaianCount == 12) {
+            session(['isGeneratingRapor' => true]);
             $bulanUrutan = [
                 'januari' => 1,
                 'februari' => 2,
@@ -161,46 +170,68 @@ class GuruController extends Controller
                 $bulan = $item->bulan;  // Mengambil nilai bulan
                 $pekan = $item->pekan;  // Mengambil nilai pekan
                 $capaianData = PenilaianSiswa::join('capaians', 'penilaian_siswas.id_capaian', '=', 'capaians.id')
-                    ->select('capaians.pernyataan as capaian_pernyataan', 'penilaian_siswas.capaian as siswa_capaian')
+                    ->select('capaians.pernyataan as capaian_pernyataan', 'penilaian_siswas.capaian as siswa_capaian', 'capaians.kriteria as capaian_kriteria')
                     ->where('penilaian_siswas.nis', $siswa->nis)
                     ->where('penilaian_siswas.bulan', $bulan)
                     ->where('penilaian_siswas.pekan', $pekan)
                     ->get()->toArray();
                 $arrayPromptCapaian[$bulan][$pekan] = $capaianData;
             }
+            $answers = [];
+            $prompts = [];
             // dd($arrayPromptCapaian);
-            $promptCapaian = 'Bagaimana penilaian siswa ' . $siswa->name . ' yang perkembangannya sebagai berikut:' . "\n\n";
-            // Loop untuk menjelajahi setiap bulan
-            foreach ($arrayPromptCapaian as $bulan => $pekanData) {
-                // Tambahkan nama bulan ke hasil
-                $promptCapaian .= "Bulan " . ucfirst($bulan) . "\n";
+            set_time_limit(1000);
+            foreach ($kriterias as $kriteria) {
+                $promptCapaian = 'Bagaimana penilaian kriteria ' . $kriteria . ' siswa yang bernama ' . $siswa->name . ' yang perkembangannya sebagai berikut:' . "\n\n";
+                // Loop untuk menjelajahi setiap bulan
+                foreach ($arrayPromptCapaian as $bulan => $pekanData) {
+                    // Tambahkan nama bulan ke hasil
+                    $promptCapaian .= "Bulan " . ucfirst($bulan) . "\n";
 
-                // Loop untuk setiap pekan dalam bulan
-                foreach ($pekanData as $pekan => $capaian) {
-                    $promptCapaian .= "Pekan " . $pekan . ":\n";
+                    // Loop untuk setiap pekan dalam bulan
+                    foreach ($pekanData as $pekan => $capaian) {
+                        $promptCapaian .= "Pekan " . $pekan . ":\n";
+                        // Loop untuk setiap capaian dalam pekan
+                        foreach ($capaian as $capaianItem) {
+                            if ($capaianItem['capaian_kriteria'] != $kriteria) {
+                                continue;
+                            } else {
+                                // Menentukan apakah siswa sudah mencapai capaian tersebut atau belum
+                                $status = $capaianItem['siswa_capaian'] == 1 ? "Muncul" : "Belum Muncul";
 
-                    // Loop untuk setiap capaian dalam pekan
-                    foreach ($capaian as $capaianItem) {
-                        // Menentukan apakah siswa sudah mencapai capaian tersebut atau belum
-                        $status = $capaianItem['siswa_capaian'] == 1 ? "Muncul" : "Belum Muncul";
-
-                        // Menambahkan pernyataan capaian dan status ke hasil
-                        $promptCapaian .= $capaianItem['capaian_pernyataan'] . " (" . $status . ")\n";
+                                // Menambahkan pernyataan capaian dan status ke hasil
+                                $promptCapaian .= $capaianItem['capaian_pernyataan'] . " (" . $status . ")\n";
+                            }
+                        }
+                        $promptCapaian .= "\n"; // Untuk memberikan spasi antar pekan
                     }
-                    $promptCapaian .= "\n"; // Untuk memberikan spasi antar pekan
+                    $promptCapaian .= "\n"; // Untuk memberikan spasi antar bulan
                 }
-                $promptCapaian .= "\n"; // Untuk memberikan spasi antar bulan
+                // dd($promptCapaian);
+                $prompts[$kriteria] = $promptCapaian;
+                $client = new Client(env('GEMINI_API_KEY'));
+                $response = $client->geminiPro()->generateContent(
+                    new TextPart($promptCapaian),
+                );
+                $answer = $response->text();
+                $answers[$kriteria] = $answer;
+
+                // Karena Gemini API limit
+                sleep(120); // Jeda selama 2 menit
             }
-            // dd($promptCapaian);
-            $client = new Client(env('GEMINI_API_KEY'));
-            $response = $client->geminiPro()->generateContent(
-                new TextPart($promptCapaian),
-            );
-            $answer = $response->text();
-            RaporTest::create([
+            // dd($prompts);
+            set_time_limit(60);
+            // dd($answers);
+            Rapor::create([
                 'nis' => $siswa->nis,
-                'nilai_dari_AI' => $answer
+                'semester' => 1,
+                'tahun_ajaran' => '2024/2025',
+                'periode' => 'Triwulan',
+                'nilai_agama_budi_pekerti' => $answers['Nilai Agama dan Budi Pekerti'],
+                'nilai_jati_diri' => $answers['Jati Diri'],
+                'nilai_literasi_steam' => $answers['Dasar Literasi dan STEAM'],
             ]);
+            session()->forget('isGeneratingRapor');
         }
 
         return redirect()->route('guru.kelas.penilaian', ['nis' => $siswa->nis, 'bulan' => $request->input('bulan'), 'pekan' => $request->input('pekan')])->with('success', 'Penilaian siswa berhasil ditambahkan.');

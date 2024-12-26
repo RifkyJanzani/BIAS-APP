@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th>Pernyataan</th>
-                    <th>Format Jawaban</th>
+                    <th>Kriteria</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -22,7 +22,7 @@
                 @foreach($capaian as $item)
                     <tr>
                         <td>{{ $item->pernyataan }}</td>
-                        <td>{{ $item->format_jawaban }}</td>
+                        <td>{{ $item->kriteria }}</td>
                         <td>
                             <a href="{{ route('admin.capaian.edit', $item->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
                             <form action="{{ route('admin.capaian.destroy', $item->id) }}" method="POST" class="d-inline">

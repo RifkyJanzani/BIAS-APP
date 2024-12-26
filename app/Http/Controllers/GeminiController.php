@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GeminiAPI\Client;
 use GeminiAPI\Resources\Parts\TextPart;
-use App\Models\RaporTest;
 
 class GeminiController extends Controller
 {
@@ -27,18 +26,4 @@ class GeminiController extends Controller
         return response()->json(['question' => $question, 'answer' => $answer]);
     }
 
-    public function generateRapor($question, $nis)
-    {
-        dd($question);
-        $client = new Client(env('GEMINI_API_KEY'));
-        $response = $client->geminiPro()->generateContent(
-            new TextPart($question),
-        );
-        $answer = $response->text();
-        RaporTest::create([
-            'nis' => $nis,
-            'nilai_dari_AI' => $answer
-        ]);
-        return response()->json(['question' => $question, 'answer' => $answer]);
-    }
 }

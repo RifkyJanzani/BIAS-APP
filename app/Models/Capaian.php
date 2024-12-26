@@ -9,5 +9,5 @@ class Capaian extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pernyataan','format_jawaban'];
+    protected $fillable = ['pernyataan', 'kriteria'];
 }

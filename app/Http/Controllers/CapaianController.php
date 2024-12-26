@@ -21,13 +21,40 @@ class CapaianController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'pernyataan' => 'required|string|max:255',
-            'format_jawaban' => 'required|in:format 1,format 2,deskripsi',
-        ]);
-        Capaian::create($request->all());
+        // Validasi
+        // dd($request->all());
+        // $request->validate([
+        //     'pernyataan' => 'required_without:pernyataan_multi|string|max:255',
+        //     'pernyataan_multi' => 'required_without:pernyataan|string',
+        // ]);
+
+        if (!empty(trim($request->pernyataan_multi))) {
+            // Mengolah input banyak pernyataan
+            $array_pernyataan = preg_split("/\r\n|\n/", $request->pernyataan_multi);
+            $array_pernyataan = array_filter($array_pernyataan, fn($value) => !is_null($value) && trim($value) !== '');
+            $array_pernyataan = array_values($array_pernyataan);
+
+            foreach ($array_pernyataan as $pernyataan) {
+                Capaian::create([
+                    'pernyataan' => $pernyataan,
+                    'kriteria' => $request->kriteria,
+                ]);
+            }
+        } else {
+            // Mengolah input satu pernyataan
+            foreach ($request->pernyataan as $pernyataan) {
+                Capaian::create([
+                    'pernyataan' => $pernyataan,
+                    'kriteria' => $request->kriteria,
+                ]);
+            }
+        }
+
+        // Redirect setelah berhasil menyimpan
         return redirect()->route('admin.capaian.index')->with('success', 'Capaian berhasil ditambahkan.');
     }
+
+
 
     public function edit($id)
     {
@@ -39,7 +66,7 @@ class CapaianController extends Controller
     {
         $request->validate([
             'pernyataan' => 'required|string|max:255',
-            'format_jawaban' => 'required|in:format 1,format 2,deskripsi',
+            // 'format_jawaban' => 'required|in:format 1,format 2,deskripsi',
         ]);
         $capaian = Capaian::findOrFail($id);
         $capaian->update($request->all());

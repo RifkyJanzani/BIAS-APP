@@ -10,8 +10,8 @@ class CreateCapaiansTable extends Migration
     {
         Schema::create('capaians', function (Blueprint $table) {
             $table->id();
-            $table->string('pernyataan');
-            $table->enum('format_jawaban', ['format 1', 'format 2', 'deskripsi']);
+            $table->string('pernyataan', 1000);
+            $table->enum('kriteria', ['Nilai Agama dan Budi Pekerti', 'Jati Diri', 'Dasar Literasi dan STEAM']);
             $table->timestamps();
         });
     }
@@ -20,4 +20,4 @@ class CreateCapaiansTable extends Migration
     {
         Schema::dropIfExists('capaians');
     }
-} 
+}

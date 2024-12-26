@@ -18,11 +18,11 @@
                 <input type="text" class="form-control" id="pernyataan" name="pernyataan" value="{{ $capaian->pernyataan }}" required>
             </div>
             <div class="mb-3">
-                <label for="format_jawaban" class="form-label">Format Jawaban</label>
-                <select class="form-select" id="format_jawaban" name="format_jawaban" required>
-                    <option value="format 1" {{ $capaian->format_jawaban == 'format 1' ? 'selected' : '' }}>Format 1</option>
-                    <option value="format 2" {{ $capaian->format_jawaban == 'format 2' ? 'selected' : '' }}>Format 2</option>
-                    <option value="deskripsi" {{ $capaian->format_jawaban == 'deskripsi' ? 'selected' : '' }}>Deskripsi</option>
+                <label for="kriteria" class="form-label">Format Jawaban</label>
+                <select class="form-select" id="kriteria" name="kriteria" required>
+                    <option value="Nilai Agama dan Budi Pekerti" {{ $capaian->kriteria == 'Nilai Agama dan Budi Pekerti' ? 'selected' : '' }}>Nilai Agama dan Budi Pekerti</option>
+                    <option value="Jati Diri" {{ $capaian->kriteria == 'Jati Diri' ? 'selected' : '' }}>Jati Diri</option>
+                    <option value="Dasar Literasi dan STEAM" {{ $capaian->kriteria == 'Dasar Literasi dan STEAM' ? 'selected' : '' }}>Dasar Literasi dan STEAM</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>

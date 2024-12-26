@@ -38,12 +38,13 @@
                         <h5 class="card-title mb-3">Nilai Agama dan Budi Pekerti</h5>
                         <div>
                             <p class="mb-2"><strong>Capaian Belajar:</strong></p>
-                            <p class="text-justify">
-                                {{ $rapor->nilai_agama_budi_pekerti ?? 'Data capaian belajar tidak tersedia.' }}
-                            </p>
+                            <div class="text-justify">
+                                {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_agama_budi_pekerti ?? 'Data capaian belajar tidak tersedia.'))) !!}
+                            </div>
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Card Jati Diri -->
                 <div class="card shadow-sm mb-4" style="border-radius: 10px;">
@@ -52,7 +53,7 @@
                         <div>
                             <p class="mb-2"><strong>Capaian Belajar:</strong></p>
                             <p class="text-justify">
-                                {{ $rapor->nilai_jati_diri ?? 'Data capaian belajar tidak tersedia.' }}
+                                {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_jati_diri ?? 'Data capaian belajar tidak tersedia.'))) !!}
                             </p>
                         </div>
                     </div>
@@ -65,7 +66,7 @@
                         <div>
                             <p class="mb-2"><strong>Capaian Belajar:</strong></p>
                             <p class="text-justify">
-                                {{ $rapor->nilai_literasi_steam ?? 'Data capaian belajar tidak tersedia.' }}
+                                {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_literasi_steam ?? 'Data capaian belajar tidak tersedia.'))) !!}
                             </p>
                         </div>
                     </div>
