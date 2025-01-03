@@ -274,7 +274,7 @@ class GuruController extends Controller
 
     public function erapor()
     {
-        $siswa = Siswa::paginate(10);
+        $siswa = Siswa::whereNotNull('nis')->paginate(10);
         return view('guru.e-rapor.index', compact('siswa'));
     }
 
