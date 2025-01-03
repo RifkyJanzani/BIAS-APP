@@ -173,7 +173,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: justify; line-height: 1.6;">
-                            {{$rapor->nilai_agama_budi_pekerti}}
+                            {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_agama_budi_pekerti ?? 'Data capaian belajar tidak tersedia.'))) !!}
                         </td>
                     </tr>
                 </tbody>
@@ -196,7 +196,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: justify; line-height: 1.6;">
-                            {{$rapor->nilai_jati_diri}}
+                            {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_jati_diri ?? 'Data capaian belajar tidak tersedia.'))) !!}
                         </td>
                     </tr>
                 </tbody>
@@ -219,7 +219,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: justify; line-height: 1.6;">
-                            {{$rapor->nilai_literasi_steam}}
+                            {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_literasi_steam ?? 'Data capaian belajar tidak tersedia.'))) !!}
                         </td>
                     </tr>
                 </tbody>

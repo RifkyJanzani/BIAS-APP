@@ -91,7 +91,7 @@
 
             <!-- Setelah table -->
             <div class="d-flex justify-content-center">
-                {{ $siswa->links() }}
+                {{ $siswa->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>
