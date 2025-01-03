@@ -14,4 +14,12 @@ class Siswa extends Model
     public function rapor() {
         return $this->hasOne(Rapor::class, 'nis', 'nis');
     }
+    public function raporTriwulan()
+    {
+        return $this->hasOne(Rapor::class, 'nis', 'nis')->where('periode', 'Triwulan');
+    }
+    public function raporAkhir()
+    {
+        return $this->hasOne(Rapor::class, 'nis', 'nis')->where('periode', 'Akhir');
+    }
 }

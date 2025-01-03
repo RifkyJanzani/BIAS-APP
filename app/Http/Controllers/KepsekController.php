@@ -19,8 +19,18 @@ class KepsekController extends Controller
 
     public function erapor()
     {
-        $siswa = Siswa::whereHas('rapor')->with('rapor')->get(); // Mengambil siswa yang memiliki data rapor
-        return view('kepalaSekolah.e-rapor.index', compact('siswa'));
+        // Ambil data siswa untuk rapor triwulan
+        $siswaTriwulan = Siswa::whereHas('rapor', function($query) {
+            $query->where('periode', 'Triwulan');
+        })->get();
+
+        // Ambil data siswa untuk rapor akhir
+        $siswaAkhir = Siswa::whereHas('rapor', function($query) {
+            $query->where('periode', 'Akhir');
+        })->get();
+
+        // Kirim data ke view
+        return view('kepalaSekolah.e-rapor.index', compact('siswaTriwulan', 'siswaAkhir'));
     }
 
     public function showSiswa($nis)

@@ -24,4 +24,9 @@ class Rapor extends Model
         'nilai_jati_diri',
         'nilai_literasi_steam',
     ];
+    // Relasi ke Siswa
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'nis', 'nis');
+    }
 }
