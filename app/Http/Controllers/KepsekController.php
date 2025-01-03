@@ -33,10 +33,10 @@ class KepsekController extends Controller
         return view('kepalaSekolah.e-rapor.index', compact('siswaTriwulan', 'siswaAkhir'));
     }
 
-    public function showSiswa($nis)
+    public function siswa()
     {
-        $siswa = Siswa::where('nis', $nis)->firstOrFail();
-        return view('kepsek.e-rapor.siswa', compact('siswa'));
+        $siswa = Siswa::all(); // Ambil semua data siswa
+        return view('kepalaSekolah.siswa', compact('siswa'));
     }
 
     public function triwulan($nis)

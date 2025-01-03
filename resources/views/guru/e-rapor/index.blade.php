@@ -31,30 +31,28 @@
                         <table class="table custom-striped mb-0">
                             <thead>
                                 <tr class="table-light">
-                                    <th class="ps-3" style="width: 30%;">Nama</th>
-                                    <th style="width: 20%;">NIS</th>
-                                    <th style="width: 20%;">Kelas</th>
-                                    <th style="width: 15%;">Umur</th>
+                                    <th style="width: 10%;">Foto</th>
+                                    <th style="width: 30%;">Nama</th>
+                                    <th style="width: 30%;">NIS</th>
+                                    <th style="width: 15%;">Kelas</th>
                                     <th style="width: 15%;">Jenis Kelamin</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($siswa as $s)
                                 <tr style="cursor: pointer" onclick="window.location='{{ route('guru.e-rapor.siswa', $s->nis) }}'">
-                                    <td class="ps-3">
+                                    <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-wrapper me-2">
-                                                <img src="{{ asset($s->photo) }}"
-                                                     class="avatar-image"
-                                                     alt="Avatar"
-                                                     onerror="this.src='{{ asset('images/foto-siswa.jpg') }}'">
-                                            </div>
-                                            <span>{{ $s->name }}</span>
+                                            @if($s->photo)
+                                                <img src="{{ asset($s->photo) }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                            @else
+                                                <img src="{{ asset('images/Profile Icon.png') }}" alt="Default Foto" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                            @endif
                                         </div>
                                     </td>
+                                    <td>{{ $s->name }}</td>
                                     <td>{{ $s->nis }}</td>
                                     <td>{{ $s->kelas }}</td>
-                                    <td>{{ $s->umur }}</td>
                                     <td>{{ $s->gender }}</td>
                                 </tr>
                                 @endforeach
@@ -66,7 +64,8 @@
 
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4">
-                {{ $siswa->links() }}
+                {{-- {{ $siswa->links() }} --}}
+                {{ $siswa->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>

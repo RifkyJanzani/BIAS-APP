@@ -38,6 +38,7 @@
                         <table class="table custom-striped mb-0">
                             <thead>
                                 <tr class="table-light">
+                                    <th>Foto</th>
                                     <th class="ps-3">Nama</th>
                                     <th>NIS</th>
                                     <th>Kelas</th>
@@ -63,20 +64,28 @@
                         <table class="table custom-striped mb-0">
                             <thead>
                                 <tr class="table-light">
-                                    <th class="ps-3">Nama</th>
+                                    <th>Foto</th>
+                                    <th>Nama</th>
                                     <th>NIS</th>
                                     <th>Kelas</th>
-                                    <th>Umur</th>
                                     <th>Jenis Kelamin</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($siswaTriwulan as $s)
                                 <tr onclick="window.location='{{ route('kepsek.e-rapor.triwulan', $s->nis) }}'" style="cursor: pointer;">
-                                    <td class="ps-3">{{ $s->name }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @if($s->photo)
+                                                <img src="{{ asset($s->photo) }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                            @else
+                                                <img src="{{ asset('images/Profile Icon.png') }}" alt="Default Foto" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>{{ $s->name }}</td>
                                     <td>{{ $s->nis }}</td>
                                     <td>{{ $s->kelas }}</td>
-                                    <td>{{ $s->umur }}</td>
                                     <td>{{ $s->gender }}</td>
                                 </tr>
                                 @endforeach
@@ -94,20 +103,28 @@
                         <table class="table custom-striped mb-0">
                             <thead>
                                 <tr class="table-light">
-                                    <th class="ps-3">Nama</th>
+                                    <th>Foto</th>
+                                    <th>Nama</th>
                                     <th>NIS</th>
                                     <th>Kelas</th>
-                                    <th>Umur</th>
                                     <th>Jenis Kelamin</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($siswaAkhir as $s)
                                 <tr onclick="window.location='{{ route('kepsek.e-rapor.akhir', $s->nis) }}'" style="cursor: pointer;">
-                                    <td class="ps-3">{{ $s->name }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @if($s->photo)
+                                                <img src="{{ asset($s->photo) }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                            @else
+                                                <img src="{{ asset('images/Profile Icon.png') }}" alt="Default Foto" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>{{ $s->name }}</td>
                                     <td>{{ $s->nis }}</td>
                                     <td>{{ $s->kelas }}</td>
-                                    <td>{{ $s->umur }}</td>
                                     <td>{{ $s->gender }}</td>
                                 </tr>
                                 @endforeach

@@ -55,11 +55,6 @@
                         </a>
                     </li>
                     <li data-bs-dismiss="offcanvas">
-                        <a href="/kepsek/guru" class="{{ request()->is('kepsek/kelas*') ? 'selected' : '' }}">
-                            <p><b>|</b></p><img src="{{ asset('images/Kelas Icon.svg') }}" alt="">Guru
-                        </a>
-                    </li>
-                    <li data-bs-dismiss="offcanvas">
                         <a href="/kepsek/e-rapor" class="{{ request()->is('kepsek/e-rapor*') ? 'selected' : '' }}">
                             <p><b>|</b></p><img src="{{ asset('images/E-Rapor Icon.svg') }}" alt="">E-Rapor
                         </a>
