@@ -75,7 +75,8 @@
 
         <!-- Tombol Buat PDF -->
         <div class="d-flex justify-content-end">
-            <a href="{{ route('generate.pdf', $siswa->nis) }}" class="btn btn-danger px-4">
+            <a href="{{ $rapor && $rapor->nilai_agama_budi_pekerti ? route('generate.pdf', $siswa->nis) : '#' }}" class="btn btn-danger px-4"
+               {{ $rapor && $rapor->nilai_agama_budi_pekerti ? '' : 'disabled' }}>
                 <img src="{{ asset('images/pdf-icon.png') }}" alt="PDF Icon" style="width: 20px; height: 20px; object-fit: cover;" class="me-2">
                 BUAT PDF
             </a>
@@ -134,6 +135,17 @@
     /* Tambahkan ini untuk transisi yang seamless */
     .offcanvas {
         transition: transform 0.3s ease-in-out;
+    }
+
+    .btn[disabled] {
+        background-color: #d3d3d3 !important; /* Warna abu-abu */
+        color: #ffffff !important; /* Warna teks putih */
+        border-color: #d3d3d3 !important; /* Warna border abu-abu */
+    }
+
+    .btn[disabled]:active {
+        background-color: #d3d3d3 !important; /* Tetap abu-abu saat ditekan */
+        border-color: #d3d3d3 !important; /* Tetap abu-abu border saat ditekan */
     }
 </style>
 @endsection
