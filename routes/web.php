@@ -73,7 +73,7 @@ Route::prefix('guru')->middleware('auth', 'guru')->group(function () {
 Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [KelasController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/dashboard/{kelas}', [KelasController::class, 'dashboard'])->name('admin.dashboard');
+    // Route::get('/dashboard/{kelas}', [KelasController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('admin.dashboard');
 
     // Akun
