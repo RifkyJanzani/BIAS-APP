@@ -107,6 +107,19 @@
         .table-bordered th, .table-bordered td {
             border: 1px solid #000; /* Border pada sel tabel */
         }
+
+        /* Page break styles */
+        h2, h3, h4, p {
+            page-break-inside: avoid;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        .long-text {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
     </style>
 </head>
 <body>
