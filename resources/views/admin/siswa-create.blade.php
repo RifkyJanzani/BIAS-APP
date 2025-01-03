@@ -37,8 +37,8 @@
             <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Masukkan kelas" required>
         </div>
         <div class="mb-3">
-            <label for="umur" class="form-label">Umur</label>
-            <input type="number" class="form-control" id="umur" name="umur" placeholder="Masukkan umur" required>
+            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label">Jenis Kelamin</label>

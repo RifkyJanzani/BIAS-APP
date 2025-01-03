@@ -10,38 +10,45 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Ambil data siswa dari database
-        $siswa = Siswa::all();
-        return view('admin.daftar', compact('siswa'));
+        $search = $request->input('search');
+    
+        // Query siswa berdasarkan pencarian
+        $siswa = Siswa::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('nis', 'like', "%{$search}%")
+                         ->orWhere('kelas', 'like', "%{$search}%");
+        })->paginate(10); // Gunakan paginate untuk navigasi
+    
+        return view('admin.daftar', compact('siswa', 'search'));
     }
+    
 
     public function dashboard(Request $request)
     {
         // Ambil jumlah siswa
         $jumlahSiswa = Siswa::count();
-
+    
         // Hitung jumlah kelas unik
         $jumlahKelas = Siswa::distinct('kelas')->count('kelas');
-
+    
         // Ambil daftar kelas dan hitung jumlah siswa per kelas
         $kelasSiswa = Siswa::select('kelas', DB::raw('COUNT(*) as jumlah'))
             ->groupBy('kelas')
             ->get();
-
-        // Filter siswa berdasarkan kelas
-        // $kelasDipilih = $request->input('kelas');
-        // if ($kelasDipilih) {
-        //     $siswa = Siswa::where('kelas', $kelasDipilih)->get();
-        // } else {
-            
-        // }
-
-        $siswa = Siswa::all();
-
-        return view('admin.dashboard', compact('jumlahSiswa', 'jumlahKelas', 'kelasSiswa', 'siswa'));
+    
+        // Filter siswa berdasarkan kelas yang dipilih
+        $kelasDipilih = $request->input('kelas');
+        if ($kelasDipilih) {
+            $siswa = Siswa::where('kelas', $kelasDipilih)->paginate(10);
+        } else {
+            $siswa = Siswa::paginate(10);
+        }
+    
+        return view('admin.dashboard', compact('jumlahSiswa', 'jumlahKelas', 'kelasSiswa', 'siswa', 'kelasDipilih'));
     }
+    
 
     public function create()
     {
@@ -54,7 +61,7 @@ class SiswaController extends Controller
             'name' => 'required|string|max:255',
             'nis' => 'required|string|max:20|unique:siswa,nis',
             'kelas' => 'required|string|max:50',
-            'umur' => 'required|integer',
+            'tanggal_lahir' => 'required|date',
             'gender' => 'required|string|in:L,P',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -75,7 +82,7 @@ class SiswaController extends Controller
             'name' => $request->name,
             'nis' => $request->nis,
             'kelas' => $request->kelas,
-            'umur' => $request->umur,
+            'tanggal_lahir' => $request->tanggal_lahir,
             'gender' => $request->gender,
             'photo' => $photoPath, // Simpan path relatif atau null jika tidak ada foto
         ]);
@@ -98,7 +105,7 @@ class SiswaController extends Controller
             'name' => 'required|string|max:255',
             'nis' => 'required|string|max:20',
             'kelas' => 'required|string|max:50',
-            'umur' => 'required|integer',
+            'tanggal_lahir' => 'required|date',
             'gender' => 'required|string|in:L,P',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

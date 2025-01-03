@@ -25,4 +25,24 @@ class KelasController extends Controller
 
         return view('admin.kelas.show', compact('kelas', 'siswa'));
     }
+
+    public function dashboard()
+    {
+        // Ambil semua kelas yang ada
+        $kelasSiswa = Siswa::select('kelas')->distinct()->get();
+
+        // Ambil kelas yang dipilih dari query string (jika ada)
+        $kelasDipilih = request('kelas');
+
+        // Ambil data siswa berdasarkan kelas yang dipilih, jika ada
+        $kelasData = Siswa::when($kelasDipilih, function ($query, $kelasDipilih) {
+            return $query->where('kelas', $kelasDipilih);
+        })
+        ->select('kelas', DB::raw('COUNT(*) as jumlah'))
+        ->groupBy('kelas')
+        ->get();
+
+        // Kirim data ke view
+        return view('admin.dashboard', compact('kelasSiswa', 'kelasData', 'kelasDipilih'));
+    }
 }

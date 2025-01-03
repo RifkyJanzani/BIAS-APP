@@ -18,7 +18,7 @@ class SiswaImport implements ToModel
             'nis'    => $row[1], // Kolom 'NOMOR_INDUK'
             'name'   => $row[3], // Kolom 'NAMA_SISWA'
             'kelas'  => $row[8], // Kolom 'KELAS'
-            'umur'   => $row[6], // Kolom 'USIA'
+            'tanggal_lahir' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[5])->format('Y-m-d'),
             'gender' => $row[7], // Kolom 'JP' (asumsi jenis kelamin)
         ]);
     }
