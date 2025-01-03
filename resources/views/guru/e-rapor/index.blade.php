@@ -66,7 +66,8 @@
 
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4">
-                {{ $siswa->links() }}
+                {{-- {{ $siswa->links() }} --}}
+                {{ $siswa->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>
