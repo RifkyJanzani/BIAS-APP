@@ -60,7 +60,8 @@
                 <table class="table table-bordered align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th class="ps-3" style="width: 30%;">Nama</th>
+                            <th style="width: 10%;">Foto</th>
+                            <th style="width: 20%;">>Nama</th>
                             <th style="width: 20%;">NIS</th>
                             <th style="width: 20%;">Kelas</th>
                             <th style="width: 15%;">Umur</th>
@@ -71,14 +72,13 @@
                         @foreach($siswa as $s)
                         <tr>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ $s->photo ? asset($s->photo) : asset('images/foto-siswa.jpg') }}"
-                                         alt="Foto Siswa"
-                                         class="rounded-circle me-3"
-                                         style="width: 30px; height: 30px;">
-                                    {{ $s->name }}
-                                </div>
+                                @if($s->photo)
+                                    <img src="{{ asset($s->photo) }}" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                @else
+                                    <img src="{{ asset('images/Profile Icon.png') }}" alt="Default Foto" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                @endif
                             </td>
+                            <td>{{ $s->name }}</td>
                             <td>{{ $s->nis }}</td>
                             <td>{{ $s->kelas }}</td>
                             <td>{{ $s->umur }}</td>
