@@ -26,23 +26,27 @@ class KelasController extends Controller
         return view('admin.kelas.show', compact('kelas', 'siswa'));
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        // Ambil semua kelas yang ada
-        $kelasSiswa = Siswa::select('kelas')->distinct()->get();
-
-        // Ambil kelas yang dipilih dari query string (jika ada)
-        $kelasDipilih = request('kelas');
-
-        // Ambil data siswa berdasarkan kelas yang dipilih, jika ada
-        $kelasData = Siswa::when($kelasDipilih, function ($query, $kelasDipilih) {
-            return $query->where('kelas', $kelasDipilih);
-        })
-        ->select('kelas', DB::raw('COUNT(*) as jumlah'))
-        ->groupBy('kelas')
-        ->get();
-
-        // Kirim data ke view
-        return view('admin.dashboard', compact('kelasSiswa', 'kelasData', 'kelasDipilih'));
+        // Ambil jumlah siswa
+        $jumlahSiswa = Siswa::count();
+    
+        // Hitung jumlah kelas unik
+        $jumlahKelas = Siswa::distinct('kelas')->count('kelas');
+    
+        // Ambil daftar kelas dan hitung jumlah siswa per kelas
+        $kelasSiswa = Siswa::select('kelas', DB::raw('COUNT(*) as jumlah'))
+            ->groupBy('kelas')
+            ->get();
+    
+        // Filter siswa berdasarkan kelas yang dipilih
+        $kelasDipilih = $request->input('kelas');
+        if ($kelasDipilih) {
+            $siswa = Siswa::where('kelas', $kelasDipilih)->paginate(10);
+        } else {
+            $siswa = Siswa::paginate(10);
+        }
+    
+        return view('admin.dashboard', compact('jumlahSiswa', 'jumlahKelas', 'kelasSiswa', 'siswa', 'kelasDipilih'));
     }
 }
