@@ -119,6 +119,7 @@
             overflow-wrap: break-word;
             word-wrap: break-word;
             hyphens: auto;
+            page-break-inside: avoid; /* Prevents breaking inside this element */
         }
     </style>
 </head>
@@ -172,9 +173,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_agama_budi_pekerti ?? 'Data capaian belajar tidak tersedia.'))) !!}
-                        </td>
+                        <div class="long-text">
+                            <td style="text-align: justify; line-height: 1.6;">
+                                {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_agama_budi_pekerti ?? 'Data capaian belajar tidak tersedia.'))) !!}
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <thead>
@@ -195,9 +198,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_jati_diri ?? 'Data capaian belajar tidak tersedia.'))) !!}
-                        </td>
+                        <div class="long-text">
+                            <td style="text-align: justify; line-height: 1.6;">
+                                {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_jati_diri ?? 'Data capaian belajar tidak tersedia.'))) !!}
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <thead>
@@ -218,9 +223,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_literasi_steam ?? 'Data capaian belajar tidak tersedia.'))) !!}
-                        </td>
+                        <div class="long-text">
+                            <td style="text-align: justify; line-height: 1.6;">
+                                {!! nl2br(e(preg_replace('/\*\*(.*?)\*\*/', '$1', $rapor->nilai_literasi_steam ?? 'Data capaian belajar tidak tersedia.'))) !!}
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <thead>
