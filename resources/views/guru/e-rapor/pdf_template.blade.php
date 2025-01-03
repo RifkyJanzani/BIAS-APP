@@ -114,7 +114,7 @@
     <table class="header-table">
         <tr>
             <td class="header-logo">
-                <img src="{{ public_path('images/bias-logo.png') }}" alt="Logo">
+                <img src="{{ public_path('images/BIAS LOGO.png') }}" alt="Logo">
             </td>
             <td class="header-text">
                 <h1>YAYASAN ASH-SHADIQIEN MARDHAATILLAH</h1>
@@ -160,7 +160,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: justify; line-height: 1.6;">
-                            Alhamdulillah di semester ini ananda {{ $siswa->name }} menunjukkan perkembangan yang baik dalam memahami nilai-nilai agama dan budi pekerti. Mampu menerapkan sikap hormat, sopan santun, dan menunjukkan perilaku yang sesuai dengan ajaran agama dalam kehidupan sehari-hari.
+                            {{$rapor->nilai_agama_budi_pekerti}}
                         </td>
                     </tr>
                 </tbody>
@@ -169,13 +169,6 @@
                         <th>Foto kegiatan anak</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            <img src="{{ public_path('images/bias-logo.png') }}" alt="">
-                        </td>
-                    </tr>
-                </tbody>
             </table>
         </div>
         <!-- Jati Diri Section -->
@@ -190,7 +183,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: justify; line-height: 1.6;">
-                            Ananda memiliki karakter yang ceria, percaya diri, dan antusias dalam mengikuti kegiatan pembelajaran. Ia menunjukkan semangat untuk beradaptasi dengan lingkungan, berinteraksi dengan teman, serta mampu mengendalikan emosi dengan baik dalam berbagai situasi.
+                            {{$rapor->nilai_jati_diri}}
                         </td>
                     </tr>
                 </tbody>
@@ -213,7 +206,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: justify; line-height: 1.6;">
-                            Dalam dasar-dasar literasi, ananda telah mampu mengenali huruf, menulis angka, serta membaca kata-kata sederhana. Dalam aspek STEAM, ananda menunjukkan kemampuan untuk mengeksplorasi dan memecahkan masalah melalui kegiatan sains sederhana, seperti pengamatan alam, eksperimen kecil, serta membangun kreativitas melalui seni dan keterampilan motorik halus.
+                            {{$rapor->nilai_literasi_steam}}
                         </td>
                     </tr>
                 </tbody>

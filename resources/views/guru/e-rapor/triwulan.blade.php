@@ -20,8 +20,11 @@
                 <div class="card shadow-sm" style="height: auto; border-radius: 10px;">
                     <div class="card-body text-center" style="padding: 30px 5px;">
                         <!-- Foto Siswa -->
-                        <img src="{{ $siswa->photo ? asset($siswa->photo) : asset('images/foto-siswa.jpg') }}" alt="Foto Siswa"
-                             class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                        @if($siswa->photo)
+                            <img src="{{ asset($siswa->photo) }}" class="rounded me-2" style="width: 120px; height: 120px; object-fit: cover;">
+                        @else
+                            <img src="{{ asset('images/Profile Icon.png') }}" alt="Default Foto" class="rounded me-2" style="width: 120px; height: 120px; object-fit: cover;">
+                        @endif
 
                         <!-- Data Siswa tanpa label -->
                         <h5 class="mb-1">{{ $siswa->name }}</h5>
