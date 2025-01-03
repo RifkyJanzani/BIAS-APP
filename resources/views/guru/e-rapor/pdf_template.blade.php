@@ -119,6 +119,7 @@
             overflow-wrap: break-word;
             word-wrap: break-word;
             hyphens: auto;
+            page-break-inside: avoid; /* Prevents breaking inside this element */
         }
     </style>
 </head>
@@ -172,9 +173,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            {{$rapor->nilai_agama_budi_pekerti}}
-                        </td>
+                        <div class="long-text">
+                            <td style="text-align: justify; line-height: 1.6;">
+                                {{$rapor->nilai_agama_budi_pekerti}}
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <thead>
@@ -195,9 +198,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            {{$rapor->nilai_jati_diri}}
-                        </td>
+                        <div class="long-text">
+                            <td style="text-align: justify; line-height: 1.6;">
+                                {{$rapor->nilai_jati_diri}}
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <thead>
@@ -218,9 +223,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: justify; line-height: 1.6;">
-                            {{$rapor->nilai_literasi_steam}}
-                        </td>
+                        <div class="long-text">
+                            <td style="text-align: justify; line-height: 1.6;">
+                                {{$rapor->nilai_literasi_steam}}
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <thead>
