@@ -5,6 +5,7 @@
     <h1>Daftar</h1>
     <div class="card">
         <div class="card-body">
+
             <!-- Form Upload Excel -->
             <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data" class="mb-3">
                 @csrf
@@ -14,6 +15,16 @@
                     <a href="{{ route('siswa.create') }}" class="btn btn-primary ms-2">
                         Tambah
                     </a>
+                </div>
+            </form>
+
+            <form action="{{ route('admin.daftar') }}" method="GET" class="mb-3">
+                <div class="d-flex align-items-center">
+                    <input type="text" name="search" class="form-control me-2" 
+                           placeholder="Cari berdasarkan nama, NIS, atau kelas" 
+                           value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                    <a href="{{ route('admin.daftar') }}" class="btn btn-secondary ms-2">Reset</a>
                 </div>
             </form>
 
@@ -69,6 +80,7 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $siswa->appends(['search' => request('search')])->links('vendor.pagination.custom') }}
             @else
                 <p class="text-center">Data siswa tidak ditemukan.</p>
             @endif
